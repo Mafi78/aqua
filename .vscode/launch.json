@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Main Process",
+      "request": "launch",
+      "type": "node",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "REMOTE_DEBUGGING_PORT": "9222"
+      }
+    },
+    {
+      "name": "Renderer Process",
+      "request": "attach",
+      "type": "chrome",
+      "webRoot": "${workspaceFolder}/src/renderer",
+      "port": 9222,
+      "timeout": 30000
+    }
+  ],
+  "compounds": [
+    {
+      "name": "All Processes",
+      "configurations": ["Main Process", "Renderer Process"],
+      "presentation": {
+        "order": 0
+      }
+    }
+  ]
+}
