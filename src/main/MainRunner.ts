@@ -38,7 +38,6 @@ const exitApp = (mainWindow: BrowserWindow): void => {
   app.exit()
 }
 
-
 export const createMainWindow = async (mainWindow: BrowserWindow): Promise<BrowserWindow> => {
   // instantiate the Main Window
   mainWindow = new BrowserWindow({
@@ -56,7 +55,7 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
   // HANDLE the Events ....
   // event close
   // mainWindow.on('close', (event: Event): void => {
-    mainWindow.on('close', async (event: Event): Promise<void> => {
+  mainWindow.on('close', async (event: Event): Promise<void> => {
     event.preventDefault()
 
     // TODO: Save the changed x, y and width and heigt values from Constantts.tempSettings to DB Pref
@@ -66,7 +65,7 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
         _myReqPref.sInDBName = EnumDbNames.Pref
         _myReqPref.sInQueryType = EnumDbDMLTypes.Update
         _myReqPref.aInParameter = [Constants.tempSettings.appHeight.toString(), 'height']
-        _myReqPref.sInQuerySql = "Update Settings set SETT_VALUE=? where SETT_NAME=?"
+        _myReqPref.sInQuerySql = 'Update Settings set SETT_VALUE=? where SETT_NAME=?'
         await SqlFuncs.executeSQL(_myReqPref)
         _myReqPref.aInParameter = [Constants.tempSettings.appWidth.toString(), 'width']
         await SqlFuncs.executeSQL(_myReqPref)
@@ -89,8 +88,11 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
     Constants.tempSettings.appWidth = mainWSize[0]
     Constants.tempSettings.appHeight = mainWSize[1]
 
-    mainWindow.webContents.send('msgReceivedAppSizeChanged', Constants.tempSettings.appWidth, Constants.tempSettings.appHeight)
-
+    mainWindow.webContents.send(
+      'msgReceivedAppSizeChanged',
+      Constants.tempSettings.appWidth,
+      Constants.tempSettings.appHeight
+    )
   })
 
   // event moved
@@ -113,7 +115,11 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
     Constants.tempSettings.appWidth = mainWSize[0]
     Constants.tempSettings.appHeight = mainWSize[1]
 
-    mainWindow.webContents.send('msgReceivedAppSizeChanged', Constants.tempSettings.appWidth, Constants.tempSettings.appHeight)
+    mainWindow.webContents.send(
+      'msgReceivedAppSizeChanged',
+      Constants.tempSettings.appWidth,
+      Constants.tempSettings.appHeight
+    )
   })
 
   // event ready o show
@@ -125,14 +131,12 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
   })
   // END of Event Handlers
 
-
   // different handlings of urls
   if (Constants.IS_DEV_ENV) {
     await mainWindow.loadURL(Constants.APP_INDEX_URL_DEV)
   } else {
     await mainWindow.loadFile(Constants.APP_INDEX_URL_PROD)
   }
-
 
   // Initialize IPC Communication
   IPCs.initialize(mainWindow)
@@ -151,7 +155,7 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
     dbDataName: 'Aqua_Data.db',
     logBasePath: userDataPath,
     logErrorPath: emsErrorLogFilename,
-/*
+    /*
     appWidth: 900,
     appHeight: 1200,
     appXPos: 50,
@@ -160,7 +164,6 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
     lastSaved: new Date()
   }
   // END OF the applciation variables
-
 
   // handle the Errorlog - every Error will end up here
   if (!errLogFileExists) {
@@ -177,12 +180,11 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
   GeneralFuncs.appendErrorLog('Application started')
   console.log('Logfilenames are setup')
 
-
   // handle the Preference file - where general settings (where are the DB files saved, where is the log file - saved)
   if (prefFileExists) {
     // define the variables
-    let defChanged = false;
-    let defPrefTry = null;
+    let defChanged = false
+    let defPrefTry = null
 
     try {
       // read it
@@ -206,7 +208,7 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
         GeneralFuncs.appendErrorLogAndAppNotification(error.retMessage, mainWindow)
       }
     }
-    if (Constants.ErrorsOccurredInApp.length === 0 ) {
+    if (Constants.ErrorsOccurredInApp.length === 0) {
       defPref = defPrefTry
     }
   } else {
@@ -234,9 +236,14 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
       mkdirSync(firstfolder)
       mkdirSync(defPref.generalDbPaths)
     } catch (error) {
-      GeneralFuncs.appendErrorLogAndAppNotification("Folder for Application-Databases: " + defPref.generalDbPaths + " could not be created automatically - ERROR: " + error, mainWindow)
+      GeneralFuncs.appendErrorLogAndAppNotification(
+        'Folder for Application-Databases: ' +
+          defPref.generalDbPaths +
+          ' could not be created automatically - ERROR: ' +
+          error,
+        mainWindow
+      )
     }
-
   }
   /* this is not needed - both Databases are using the same folder
   const dbDataDBFileExists = checkFileExistsSync(Constants.dbDataSettings.pathAndFilename)
@@ -257,14 +264,20 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
   Constants.dbPrefObject = SqlFuncs.getDBObject(_mydbInit)
   // check if file exists
   if (!checkFileExistsSync(Constants.dbPrefSettings.pathAndFilename)) {
-    GeneralFuncs.appendErrorLogAndAppNotification("Folder for Preference DB: " + Constants.dbPrefSettings.pathAndFilename + " does not exist", mainWindow)
+    GeneralFuncs.appendErrorLogAndAppNotification(
+      'Folder for Preference DB: ' + Constants.dbPrefSettings.pathAndFilename + ' does not exist',
+      mainWindow
+    )
   }
 
   const _mydbDataInit = new DBQueryInObject()
   _mydbDataInit.sInDBName = EnumDbNames.Data
   Constants.dbDataObject = SqlFuncs.getDBObject(_mydbDataInit)
   if (!checkFileExistsSync(Constants.dbDataSettings.pathAndFilename)) {
-    GeneralFuncs.appendErrorLogAndAppNotification("Folder for Data DB: " + Constants.dbDataSettings.pathAndFilename + " does not exist", mainWindow)
+    GeneralFuncs.appendErrorLogAndAppNotification(
+      'Folder for Data DB: ' + Constants.dbDataSettings.pathAndFilename + ' does not exist',
+      mainWindow
+    )
   }
 
   try {
@@ -280,10 +293,7 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
         GeneralFuncs.appendErrorLogAndAppNotification(resPrefDB.retMessage)
       }
     }
-  } catch (error) {
-
-  }
-
+  } catch (error) {}
 
   // only do this when both DBs are available
   // if (checkFileExistsSync(Constants.dbPrefSettings.pathAndFilename) && checkFileExistsSync(Constants.dbDataSettings.pathAndFilename)) {
@@ -301,12 +311,11 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
     // run all relevant releasenotes
     await implementReleaseNotes(resRelNotes)
 
-
     // After all db insertions (maybe from an update) check the pref db again
     resPrefDB = await checkPrefDb()
 
     // apply the settings of the preference file
-    const dbPrefTabSettingsArray : dbPrefTabSettings[] = resPrefDB.retObject;
+    const dbPrefTabSettingsArray: dbPrefTabSettings[] = resPrefDB.retObject
     /*
     const test = dbPrefTabSettingsArray.filter( (i) : dbPrefTabSettings => {
       if( i.SETT_ID === 1) { return i }
@@ -315,33 +324,41 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
     blah = test[0];
     console.log(blah.SETT_ID);
     */
-    const wHeight : dbPrefTabSettings = dbPrefTabSettingsArray.filter( (i) : dbPrefTabSettings => {
-      if( i.SETT_NAME === "height") { return i }
-    })[0];
-    const wWidth : dbPrefTabSettings = dbPrefTabSettingsArray.filter( (i) : dbPrefTabSettings => {
-      if( i.SETT_NAME === "width") { return i }
-    })[0];
-    const wXPos : dbPrefTabSettings = dbPrefTabSettingsArray.filter( (i) : dbPrefTabSettings => {
-      if( i.SETT_NAME === "xpos") { return i }
-    })[0];
-    const wYPos : dbPrefTabSettings = dbPrefTabSettingsArray.filter( (i) : dbPrefTabSettings => {
-      if( i.SETT_NAME === "ypos") { return i }
-    })[0];
+    const wHeight: dbPrefTabSettings = dbPrefTabSettingsArray.filter((i): dbPrefTabSettings => {
+      if (i.SETT_NAME === 'height') {
+        return i
+      }
+    })[0]
+    const wWidth: dbPrefTabSettings = dbPrefTabSettingsArray.filter((i): dbPrefTabSettings => {
+      if (i.SETT_NAME === 'width') {
+        return i
+      }
+    })[0]
+    const wXPos: dbPrefTabSettings = dbPrefTabSettingsArray.filter((i): dbPrefTabSettings => {
+      if (i.SETT_NAME === 'xpos') {
+        return i
+      }
+    })[0]
+    const wYPos: dbPrefTabSettings = dbPrefTabSettingsArray.filter((i): dbPrefTabSettings => {
+      if (i.SETT_NAME === 'ypos') {
+        return i
+      }
+    })[0]
 
     // const prefHeigth = 60;
-    mainWindow.setSize( Number( wWidth.SETT_VALUE ), Number( wHeight.SETT_VALUE ) )
-    mainWindow.setPosition( Number( wXPos.SETT_VALUE ), Number( wYPos.SETT_VALUE ) )
+    mainWindow.setSize(Number(wWidth.SETT_VALUE), Number(wHeight.SETT_VALUE))
+    mainWindow.setPosition(Number(wXPos.SETT_VALUE), Number(wYPos.SETT_VALUE))
     /*
     mainWindow.setSize(Constants.prefFile.appWidth, Constants.prefFile.appHeight)
     mainWindow.setPosition(Constants.prefFile.appXPos, Constants.prefFile.appYPos)
     */
   }
 
-  let withOrWithoutErrors = "";
+  let withOrWithoutErrors = ''
   if (Constants.ErrorsOccurredInApp.length === 0) {
-    withOrWithoutErrors = " without errors.";
+    withOrWithoutErrors = ' without errors.'
   } else {
-    withOrWithoutErrors = " with errors: " + Constants.ErrorsOccurredInApp;
+    withOrWithoutErrors = ' with errors: ' + Constants.ErrorsOccurredInApp
   }
   console.log('MainRunner.createMainWindow finished ' + withOrWithoutErrors, resPrefDB)
 

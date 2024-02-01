@@ -34,8 +34,8 @@ export class DBValueOutObject {
 }
 
 export interface dbPrefTabSettings {
-  SETT_ID: number,
-  SETT_NAME: string,
+  SETT_ID: number
+  SETT_NAME: string
   SETT_VALUE: string
 }
 

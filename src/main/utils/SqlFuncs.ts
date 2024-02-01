@@ -109,7 +109,6 @@ export default class sqlFuncs {
           }
         })
       })
-
     } else {
       // call it with parameters
       return new Promise<DBValueOutObject>((resolve, reject) => {
@@ -130,9 +129,7 @@ export default class sqlFuncs {
           }
         })
       })
-
     }
-
   }
 }
 

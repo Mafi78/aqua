@@ -12,8 +12,8 @@ const { toggleLMBCollapsed } = storeLeftMenuBar()
 
 const naviElemFiltered = computed(() => naviElems.filter((naviElem) => naviElem.visible === true))
 
-const receivedError = ref('');
-const dialog = ref(false);
+const receivedError = ref('')
+const dialog = ref(false)
 /*
 const handleRoute = (path: string): void => {
   router.push(path)
@@ -87,15 +87,9 @@ onMounted((): void => {
     </v-btn>
 
     <!-- @click="cleanErrorList()" -->
-    <v-btn
-      v-if="receivedError.length > 0"
-    >
+    <v-btn v-if="receivedError.length > 0">
       <v-icon>mdi-alert</v-icon>
-      <v-dialog
-        v-model="dialog"
-        activator="parent"
-        width="auto"
-      >
+      <v-dialog v-model="dialog" activator="parent" width="auto">
         <v-card>
           <v-card-text>
             {{ receivedError }}
@@ -127,7 +121,6 @@ onMounted((): void => {
       </v-list>
     </v-menu>
   </v-app-bar>
-
 </template>
 
 <style scoped>

@@ -10,7 +10,7 @@ export default class Constants {
     dbDataName: '',
     logBasePath: '',
     logErrorPath: '',
-/*
+    /*
     appWidth: 1500,
     appHeight: 800,
     appXPos: 100,
@@ -69,6 +69,6 @@ export default class Constants {
     appWidth: 1500,
     appHeight: 800,
     appXPos: 100,
-    appYPos: 100,
+    appYPos: 100
   }
 }

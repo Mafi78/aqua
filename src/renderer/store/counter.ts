@@ -19,7 +19,6 @@ export const storeLeftMenuBar = defineStore('leftCounter', {
     leftStateCollapsed: false,
     leftStateVisible: true,
     leftWidth: 251
-
   }),
   getters: {
     // not necessary - can also be handled via access to state direct
@@ -34,7 +33,7 @@ export const storeLeftMenuBar = defineStore('leftCounter', {
       // this.leftState = !stateVis
       this.leftStateVisible = !this.leftStateVisible
     },
-    changeLMBWidth( lmbWidth: number ) {
+    changeLMBWidth(lmbWidth: number) {
       if (lmbWidth >= 250 && lmbWidth <= 600) {
         // this.leftState = !stateVis
         this.leftWidth = lmbWidth
@@ -42,5 +41,3 @@ export const storeLeftMenuBar = defineStore('leftCounter', {
     }
   }
 })
-
-

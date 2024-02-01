@@ -35,7 +35,12 @@ const toggleBottomVisibility = (): void => {
 
     <!-- rail -->
     <!-- v-model="drawer" :width="leftMenuWidth" -->
-    <v-navigation-drawer v-model="drawer" :rail="leftStateCollapsed" permanent :width="leftMenuWidth">
+    <v-navigation-drawer
+      v-model="drawer"
+      :rail="leftStateCollapsed"
+      permanent
+      :width="leftMenuWidth"
+    >
       <v-list>
         <v-list-item
           prepend-avatar="/images/Manfred_Schwarz.png"

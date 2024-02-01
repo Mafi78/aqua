@@ -20,38 +20,40 @@ const navigation = ref({
   borderSize: 3
 })
 */
-const AppWidth = ref(0);
-const AppHeight = ref(0);
+const AppWidth = ref(0)
+const AppHeight = ref(0)
 const color = ref('red')
 
-const receivedError = ref('');
+const receivedError = ref('')
 
 const setSliderValue = (val) => {
-    if (val >= 250 && val <= 600) {
-      // leftWidth.value = val;
-      changeLMBWidth(val);
-      // console.log(`END Event ${val}`);
-      color.value = 'green';
-    } else {
-      color.value = 'red';
-    }
+  if (val >= 250 && val <= 600) {
+    // leftWidth.value = val;
+    changeLMBWidth(val)
+    // console.log(`END Event ${val}`);
+    color.value = 'green'
+  } else {
+    color.value = 'red'
   }
+}
 
 onMounted((): void => {
-
-  window.mainApi.receive('msgReceivedAppSizeChanged', (event: Event, width: number, height: number) => {
-    // console.log('msgReceivedVersion is called');
-    AppWidth.value = width
-    AppHeight.value = height
-  })
+  window.mainApi.receive(
+    'msgReceivedAppSizeChanged',
+    (event: Event, width: number, height: number) => {
+      // console.log('msgReceivedVersion is called');
+      AppWidth.value = width
+      AppHeight.value = height
+    }
+  )
 
   window.mainApi.receive('msgReceivedError', (event: Event, text: string) => {
     // console.log('msgReceivedVersion is called');
     receivedError.value = text
   })
   try {
-  //  setBorderWidth(this)
-  //  setEvents(this)
+    //  setBorderWidth(this)
+    //  setEvents(this)
   } catch (error) {}
 })
 // End dragable
@@ -94,7 +96,6 @@ const toggleBottomVisibility = (): void => {
         :color="color"
         step="1"
         @end="setSliderValue"
-
       >
         <!--template #append>
           <v-text-field
@@ -126,7 +127,12 @@ const toggleBottomVisibility = (): void => {
 
     <!-- rail -->
     <!-- v-model="drawer" :width="leftMenuWidth" -->
-    <v-navigation-drawer v-model="leftStateVisible" :rail="leftStateCollapsed" permanent :width="leftWidth">
+    <v-navigation-drawer
+      v-model="leftStateVisible"
+      :rail="leftStateCollapsed"
+      permanent
+      :width="leftWidth"
+    >
       <v-list>
         <v-list-item
           prepend-avatar="/images/Manfred_Schwarz.png"
@@ -166,9 +172,7 @@ const toggleBottomVisibility = (): void => {
           <!-- v-list-item-title>{{ item.title }}</v-list-item-title -->
         </v-list-item>
         <v-list-item>
-          LeftWidth: {{ leftWidth }}
-          AppWidth: {{ AppWidth }}
-          AppHeight: {{ AppHeight }}
+          LeftWidth: {{ leftWidth }} AppWidth: {{ AppWidth }} AppHeight: {{ AppHeight }}
         </v-list-item>
         <v-list-item>
           {{ receivedError }}

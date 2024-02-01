@@ -85,7 +85,7 @@ export default class IPCs {
     // Clean the Error entries
     ipcMain.on('msgRequestCleanErrors', () => {
       // console.log('Request get Version is called')
-      Constants.ErrorsOccurredInApp = "";
+      Constants.ErrorsOccurredInApp = ''
       window.webContents.send('msgReceivedError', Constants.ErrorsOccurredInApp)
     })
   }

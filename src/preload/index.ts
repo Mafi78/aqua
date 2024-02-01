@@ -8,7 +8,7 @@ const mainAvailChannels: string[] = [
   'msgRequestSQLData',
   'msgRequestSQLPref',
   'msgRequestConstant',
-  'msgRequestCleanErrors',
+  'msgRequestCleanErrors'
 ]
 const rendererAvailChannels: string[] = [
   'msgReceivedVersion',

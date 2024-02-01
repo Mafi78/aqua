@@ -202,7 +202,15 @@ const handleCountIncrease = (): void => {
               label="Tabelleninhalt anzeigen"
               required
               placeholder="Bitte eine Tabelle auswählen"
-              :items="['Create an Error', 'TimeCustomer', 'TimeCostCenter', 'TimeProject', 'TimeSubProject', 'TimeActivity', 'TimeBookings']"
+              :items="[
+                'Create an Error',
+                'TimeCustomer',
+                'TimeCostCenter',
+                'TimeProject',
+                'TimeSubProject',
+                'TimeActivity',
+                'TimeBookings'
+              ]"
             >
             </v-combobox>
 

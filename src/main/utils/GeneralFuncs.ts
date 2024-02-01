@@ -12,7 +12,7 @@ export default class generalFuncs {
     let dateStr =
       tsDate.getFullYear() +
       '-' +
-      (tsDate.getMonth() +1).toString().padStart(2, '0') +
+      (tsDate.getMonth() + 1).toString().padStart(2, '0') +
       '-' +
       tsDate.getDate().toString().padStart(2, '0') +
       ' ' +
