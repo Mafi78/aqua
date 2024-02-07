@@ -131,7 +131,7 @@ const handleCountIncrease = (): void => {
         <h2 class="my-4">{{ $t('desc.welcome-title') }}</h2>
         <p>{{ $t('desc.welcome-desc') }}</p>
         <p class="my-4"
-          >App Version: <strong>{{ appVersion }}</strong></p
+          >App Version: 4711 <strong>{{ appVersion }}</strong></p
         >
         Nimm das {{ routStr }}
         <v-row class="my-4">
