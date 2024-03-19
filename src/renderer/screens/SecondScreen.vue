@@ -12,7 +12,7 @@
    
     <!-- Lower Third - Three Square Buttons -->
     <v-row justify="center" align="end">
-      <v-col cols="12" md="4">
+      <v-col cols="4" md="4">
         <!-- Button 1 -->
         <v-btn color="graphite" dark class="white--text" tile>
           <v-text class="font-weight-bold">B1</v-text>
@@ -24,7 +24,7 @@
         </v-row>
       </v-col>
 
-      <v-col cols="12" md="4">
+      <v-col cols="4" md="4">
         <!-- Button 2 -->
         <v-btn color="graphite" dark class="white--text" tile>
           <v-text class="font-weight-bold">B2</v-text>
@@ -36,17 +36,24 @@
         </v-row>
       </v-col>
 
-      <v-col cols="12" md="4">
-        <!-- Button 3 -->
+      <v-col cols="2" md="4">
+        <!-- Button 3 >
         <v-btn color="graphite" dark class="white--text" tile>
-          <v-text class="font-weight-bold">B3</v-text>
+          <v-text class="font-weight-bold">C3</v-text>
         </v-btn>
         <v-row justify="center">
           <v-col>
             <v-text class="caption text-center">Work on a database</v-text>
           </v-col>
-        </v-row>
+        </v-row -->
+        <v-card
+      subtitle="This is a subtitle"
+      text="This is content"
+      title="This is a title"
+      width="400"
+    ></v-card>
       </v-col>
+      <v-col cols="2"></v-col>
     </v-row>
   </v-container>
 </template>
