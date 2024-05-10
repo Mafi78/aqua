@@ -133,16 +133,16 @@ const toggleBottomVisibility = (): void => {
       permanent
       :width="leftWidth"
     >
-      <v-list>
+      <!--v-list>
         <v-list-item
           prepend-avatar="/images/Manfred_Schwarz.png"
           title="Manfred Schwarz"
           subtitle="manfred.schwarz@gmail.com"
         >
         </v-list-item>
-      </v-list>
+      </v-list-->
 
-      <v-divider></v-divider>
+      <!--v-divider></v-divider-->
 
       <!-- v-list density="compact" nav>
         <v-list-item
@@ -171,12 +171,12 @@ const toggleBottomVisibility = (): void => {
         >
           <!-- v-list-item-title>{{ item.title }}</v-list-item-title -->
         </v-list-item>
-        <v-list-item>
+        <!--v-list-item>
           LeftWidth: {{ leftWidth }} AppWidth: {{ AppWidth }} AppHeight: {{ AppHeight }}
-        </v-list-item>
-        <v-list-item>
+        </v-list-item-->
+        <!--v-list-item>
           {{ receivedError }}
-        </v-list-item>
+        </v-list-item-->
       </v-list>
     </v-navigation-drawer>
 

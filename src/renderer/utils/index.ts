@@ -16,6 +16,7 @@ export default class Utils {
   static naviElems = [
     { title: 'Overview', action: '/', icon: 'mdi-folder', visible: true },
     { title: 'Zeiterfassung', action: '/timeinput', icon: 'mdi-account-multiple', visible: true },
+    { title: 'neues Sidebarelement', action: '/second', icon: 'mdi-abacus', visible: true },
     {
       title: 'Stammdatenpflege',
       action: '/masterdata',

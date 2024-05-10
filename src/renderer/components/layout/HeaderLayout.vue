@@ -71,7 +71,7 @@ onMounted((): void => {
       </v-app-bar-nav-icon>
     </template>
 
-    <v-app-bar-title>{{ $t(titleKey) }} Hallo Welt.ß</v-app-bar-title>
+    <v-app-bar-title>{{ $t(titleKey) }}</v-app-bar-title>
 
     <v-spacer></v-spacer>
 

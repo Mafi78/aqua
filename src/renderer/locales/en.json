@@ -6,8 +6,9 @@
   },
   "title": {
     "main": "Main Screen",
-    "second": "Second Screen",
-    "error": "Unknown Error"
+    "second": "Second Screen Mami",
+    "error": "Unknown Error",
+    "preferences": "Settings"
   },
   "menu": {
     "change-theme": "Change Theme",
