@@ -15,5 +15,14 @@
     "increase-count": "aumentar la cuenta en 1",
     "documentation": "documento",
     "github": "código fuente"
+  },
+  "generaltext": {
+    "change-theme": "Thema wechseln",
+    "change-language": "Sprache ändern",
+    "increase-count": "Zählerstand um 1 erhöhen",
+    "documentation": "dokumentieren",
+    "github": "Quellcode",
+    "sql": "SQL",
+    "hello": "Ola"
   }
 }

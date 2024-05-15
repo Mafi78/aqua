@@ -204,12 +204,11 @@ const handleCountIncrease = (): void => {
               placeholder="Bitte eine Tabelle auswählen"
               :items="[
                 'Create an Error',
-                'TimeCustomer',
-                'TimeCostCenter',
-                'TimeProject',
-                'TimeSubProject',
-                'TimeActivity',
-                'TimeBookings'
+                'Databases',
+                'Entities',
+                'Entity_Category',
+                'Entity_Characteristics',
+                'Scenario'
               ]"
             >
             </v-combobox>

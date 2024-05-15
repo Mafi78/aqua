@@ -8,7 +8,13 @@
     "main": "Hauptbildschirm",
     "second": "Zweiter Bildschirm",
     "error": "Ein Fehler ist aufgetreten",
-    "preferences": "Einstellungen"
+    "preferences": "Einstellungen",
+    "accessscenario": "Auf Szenario zugreifen",
+    "runscenario": "Ein Szenario ausführen",
+    "prepareonthego": "Prepare on-the-go",
+    "workondb": "an einer Datenbank arbeiten",
+    "accessdocu": "Access Documentation",
+    "culturehints": "Culture Hints"
   },
   "menu": {
     "change-theme": "Thema wechseln",
@@ -18,5 +24,14 @@
     "github": "Quellcode",
     "sql": "SQL",
     "constants": "de_Constants"
+  },
+  "generaltext": {
+    "change-theme": "Thema wechseln",
+    "change-language": "Sprache ändern",
+    "increase-count": "Zählerstand um 1 erhöhen",
+    "documentation": "dokumentieren",
+    "github": "Quellcode",
+    "sql": "SQL",
+    "hello": "Hallo"
   }
 }

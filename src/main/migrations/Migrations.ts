@@ -12,7 +12,7 @@ export default class Migrations {
         { db: 'Pref', sql: 'INSERT INTO Settings VALUES (4, "ypos", "50")' },
         { db: 'Pref', sql: 'INSERT INTO Settings VALUES (5, "db_version", "1.0.0")' },
         { db: 'Pref', sql: 'INSERT INTO Settings VALUES (6, "DisplayMode", "system")' },
-        { db: 'Pref', sql: 'INSERT INTO BlahSettings VALUES (4, "Error needed", "error")' },
+        /* { db: 'Pref', sql: 'INSERT INTO BlahSettings VALUES (4, "Error needed", "error")' }, */
         {
           db: 'Pref',
           sql: 'CREATE TABLE ReleaseNotes ( RELN_ID INTEGER NOT NULL UNIQUE, RELN_DESC TEXT(1000), RELN_NUM TEXT(12), RELN_DATE TEXT(10), RELN_DBUP_ID TEXT(9), RELN_INCLUDED INTEGER)'
@@ -22,58 +22,64 @@ export default class Migrations {
           db: 'Data',
           sql: 'PRAGMA foreign_keys = ON'
         },
-        /* Kunde, Projekte, Aktivitäten */
+        /* Databases */
         {
           db: 'Data',
-          sql: 'CREATE TABLE TimeCustomer ( CUST_ID INTEGER PRIMARY KEY, CUST_NAME TEXT(40), CUST_DESC TEXT(1000), CUST_CREATEDDATE TEXT(10))'
-        },
+          sql: 'CREATE TABLE Databases (             DABA_ID INTEGER PRIMARY KEY AUTOINCREMENT,            DABA_NAME TEXT NOT NULL,            DABA_DESCRIPTION TEXT,            DABA_VERSION TEXT,            DABA_CREATED_AT TEXT,            DABA_LAST_EDITED_AT TEXT,            DABA_LAST_EDITED_BY INTEGER,            DABA_INHERITED_FROM_ID INTEGER,            DABA_NOTES TEXT          )'
+        }/*,
         {
           db: 'Data',
           sql: 'INSERT INTO TimeCustomer ( CUST_ID, CUST_NAME, CUST_DESC, CUST_CREATEDDATE) VALUES (0, "Please pick a Customer", "Picker-Entry", "1978-16-11")'
+        } */,
+        {
+          db: 'Data',
+          sql: 'CREATE TABLE Entity_Category (            ENCA_ID INTEGER PRIMARY KEY AUTOINCREMENT,            ENCA_NAME TEXT,            ENCA_DESCRIPTION TEXT,            ENCA_LOCKED INTEGER DEFAULT (0)          )'
         },
         {
           db: 'Data',
-          sql: 'CREATE TABLE TimeCostCenter ( COCE_ID INTEGER PRIMARY KEY, COCE_NAME TEXT(40), COCE_DESC TEXT(1000), COCE_CREATEDDATE TEXT(10))'
+          sql: 'INSERT INTO Entity_Category          (ENCA_ID, ENCA_NAME, ENCA_DESCRIPTION, ENCA_LOCKED)          VALUES(0, "Countries", "Länder", 0)'
         },
         {
           db: 'Data',
-          sql: 'INSERT INTO TimeCostCenter ( COCE_ID, COCE_NAME, COCE_DESC, COCE_CREATEDDATE) VALUES (0, "Please pick a Cost-Center", "Picker-Entry", "1978-16-11")'
+          sql: 'INSERT INTO Entity_Category          (ENCA_ID, ENCA_NAME, ENCA_DESCRIPTION, ENCA_LOCKED)          VALUES(1, "People", "Personen", 0)'
         },
         {
           db: 'Data',
-          sql: 'CREATE TABLE TimeProject ( PROJ_ID INTEGER PRIMARY KEY, PROJ_NAME TEXT(4000), PROJ_DESC TEXT(1000), PROJ_CREATEDDATE TEXT(10), PROJ_CUST_ID INTEGER NOT NULL, PROJ_COCE_ID INTEGER, FOREIGN KEY (PROJ_CUST_ID) REFERENCES TimeCustomer (CUST_ID) ON UPDATE RESTRICT ON DELETE RESTRICT, FOREIGN KEY (PROJ_COCE_ID) REFERENCES TimeCostCenter (COCE_ID) ON UPDATE RESTRICT ON DELETE RESTRICT )'
+          sql: 'CREATE TABLE Entity_Characteristics (            ENCH_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,            ENCH_NOTES TEXT,            ENCH_SHARED_UNDERSTANDING REAL NOT NULL,            ENCH_PERFORMANCE_FEEDBACK REAL NOT NULL,            ENCH_INFLUENCE_NARRATIVE REAL NOT NULL,            ENCH_LEADERSHIP_STYLE REAL NOT NULL,            NCH_DECISIONMAKING_APPROACH REAL NOT NULL,            ENCH_RELATIONSHIP_FOUNDATION REAL NOT NULL,            ENCH_CONFLICT_RESOLUTION REAL NOT NULL,            ENCH_TIME_MANAGEMENT REAL NOT NULL,            ENCH_CREATED_AT TEXT,            ENCH_LAST_EDITED_AT TEXT,            ENCH_LAST_EDITED_BY TEXT          )'
         },
+        {
+          db: 'Data',
+          sql: 'INSERT INTO Entity_Characteristics ( ENCH_ID, ENCA_NAME, ENCA_DESCRIPTION) VALUES (0, "Please pick a Category", "Category-Entry")'
+        },
+        {
+          db: 'Data',
+          sql: 'CREATE TABLE Entities (            ENTI_ID INTEGER PRIMARY KEY AUTOINCREMENT,            ENTI_NAME TEXT,            ENTI_CATEGORY_ID INTEGER DEFAULT (0),            ENTI_LOCKED INTEGER DEFAULT (0),            ENTI_CREATED_AT TEXT,            ENTI_LAST_EDITED_AT TEXT,            ENTI_LAST_EDITED_BY TEXT,            ENTI_NOTES TEXT,            ENTI_DB_ID INTEGER,            ENTI_CHAR_ID INTEGER,            CONSTRAINT Entities_Entity_Category_FK FOREIGN KEY (ENTI_CATEGORY_ID) REFERENCES Entity_Category(ENCA_ID) ON DELETE SET DEFAULT ON UPDATE RESTRICT,            CONSTRAINT Entities_Databases_FK FOREIGN KEY (ENTI_DB_ID) REFERENCES Databases(DABA_ID) ON DELETE CASCADE ON UPDATE RESTRICT,            CONSTRAINT Entities_Characteristics_FK FOREIGN KEY (ENTI_CHAR_ID) REFERENCES Entity_Characteristics(ENCH_ID) ON DELETE CASCADE ON UPDATE RESTRICT          )'
+        }/*,
         {
           db: 'Data',
           sql: 'INSERT INTO TimeProject ( PROJ_ID, PROJ_NAME, PROJ_DESC, PROJ_CREATEDDATE, PROJ_CUST_ID) VALUES (0, "Please pick a Project", "Picker-Entry", "1978-16-11", 0)'
-        },
+        } */,
+
         {
           db: 'Data',
-          sql: 'CREATE TABLE TimeSubProject ( SPRO_ID INTEGER PRIMARY KEY, SPRO_NAME TEXT(4000), SPRO_DESC TEXT(1000), SPRO_CREATEDDATE TEXT(10), SPRO_PROJ_ID INTEGER NOT NULL, SPRO_COCE_ID INTEGER, FOREIGN KEY (SPRO_PROJ_ID) REFERENCES TimeProject (PROJ_ID) ON UPDATE RESTRICT ON DELETE RESTRICT, FOREIGN KEY (SPRO_COCE_ID) REFERENCES TimeCostCenter (COCE_ID) ON UPDATE RESTRICT ON DELETE RESTRICT )'
-        },
-        {
-          db: 'Data',
-          sql: 'INSERT INTO TimeSubProject ( SPRO_ID, SPRO_NAME, SPRO_DESC, SPRO_CREATEDDATE, SPRO_PROJ_ID) VALUES (0, "Please pick a Sub Project", "Picker-Entry", "1978-16-11", 0)'
-        },
-        {
-          db: 'Data',
-          sql: 'CREATE TABLE TimeActivity ( AKTI_ID INTEGER PRIMARY KEY, AKTI_NAME TEXT(40), AKTI_DESC TEXT(500), AKTI_CREATEDDATE TEXT(10), AKTI_TIMEBOOKINGFACTORPERCENT Default 100, AKTI_SPRO_ID INTEGER NOT NULL, AKTI_COCE_ID INTEGER, FOREIGN KEY (AKTI_SPRO_ID) REFERENCES TimeSubProject (SPRO_ID) ON UPDATE RESTRICT ON DELETE RESTRICT, FOREIGN KEY (AKTI_COCE_ID) REFERENCES TimeCostCenter (COCE_ID) ON UPDATE RESTRICT ON DELETE RESTRICT )'
-        },
+          sql: 'CREATE TABLE Scenario (            SCEN_ID INTEGER PRIMARY KEY AUTOINCREMENT,            SCEN_NAME TEXT,            SCEN_DB_ID INTEGER,            SCEN_ENTI_ID1 INTEGER,            SCEN_ENTI_ID2 INTEGER,            SCEN_CREATED_AT TEXT,            SCEN_LAST_EDITED_BY TEXT,            SCEN_LAST_EDITED_AT TEXT,            SCEN_NOTES TEXT,            CONSTRAINT Scenario_Databases_FK FOREIGN KEY (SCEN_DB_ID) REFERENCES Databases(DABA_ID) ON DELETE CASCADE ON UPDATE RESTRICT,            CONSTRAINT Scenario_Entities_FK FOREIGN KEY (SCEN_ENTI_ID1) REFERENCES Entities(ENTI_ID) ON DELETE SET NULL ON UPDATE RESTRICT,            CONSTRAINT Scenario_Entities_FK_1 FOREIGN KEY (SCEN_ENTI_ID2) REFERENCES Entities(ENTI_ID) ON DELETE SET NULL ON UPDATE RESTRICT          )'
+        }/*,
         {
           db: 'Data',
           sql: 'INSERT INTO TimeActivity ( AKTI_ID, AKTI_NAME, AKTI_DESC, AKTI_CREATEDDATE, AKTI_SPRO_ID) VALUES (0, "Please pick a Activity", "Picker-Entry", "1978-16-11", 0)'
-        },
-        {
-          db: 'Data',
-          sql: 'CREATE TABLE TimeBookings ( BOKI_ID INTEGER PRIMARY KEY, BOKI_MAINTEXT TEXT(100) NOT NULL, BOKI_DESC TEXT(500), BOKI_DAY_BEGIN TEXT(10) NOT NULL, BOKI_DAY_END TEXT(10), BOKI_TIME_BEGIN TEXT(8), BOKI_TIME_END TEXT(8), BOKI_TIME_TOTAL REAL NOT NULL, BOKI_PAUSE_MIN INTEGER, BOKI_AKTI_ID INTEGER NOT NULL, BOKI_COCE_ID INTEGER, FOREIGN KEY (BOKI_AKTI_ID) REFERENCES TimeActivity (AKTI_ID) ON UPDATE RESTRICT ON DELETE RESTRICT, FOREIGN KEY (BOKI_COCE_ID) REFERENCES TimeCostCenter (COCE_ID) ON UPDATE RESTRICT ON DELETE RESTRICT )'
-        }
+        } */
       ]
     },
     always: {
       dbUp: [
+        /* Let's check if this is ncessary */
+        {
+          db: 'Data',
+          sql: 'PRAGMA foreign_keys = ON'
+        },
         {
           db: 'Pref',
-          sql: 'INSERT OR IGNORE INTO ReleaseNotes VALUES (1, "First major Release. Includes Basic functionality", "1.0.1", "2023-11-26", "100000001", 0)'
+          sql: 'INSERT OR IGNORE INTO ReleaseNotes VALUES (1, "First major Release. Includes Basic functionality", "1.0.1", "2024-05-26", "100000001", 0)'
         },
         {
           db: 'Pref',

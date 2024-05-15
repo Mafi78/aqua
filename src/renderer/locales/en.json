@@ -8,7 +8,13 @@
     "main": "Main Screen",
     "second": "Second Screen Mami",
     "error": "Unknown Error",
-    "preferences": "Settings"
+    "preferences": "Settings",
+    "accessscenario": "Access Scenario",
+    "runscenario": "Run a Scenario",
+    "prepareonthego": "Prepare on-the-go",
+    "workondb": "Work on a Database",
+    "accessdocu": "Access Documentation",
+    "culturehints": "Culture Hints"
   },
   "menu": {
     "change-theme": "Change Theme",
@@ -18,5 +24,14 @@
     "github": "Source Code",
     "sql": "SQL",
     "constants": "en_Constants"
+  },
+  "generaltext": {
+    "change-theme": "Thema wechseln",
+    "change-language": "Sprache ändern",
+    "increase-count": "Zählerstand um 1 erhöhen",
+    "documentation": "dokumentieren",
+    "github": "Quellcode",
+    "sql": "SQL",
+    "hello": "Hi my friends"
   }
 }
