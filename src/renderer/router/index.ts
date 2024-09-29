@@ -4,7 +4,14 @@ import {
   ErrorScreen,
   SecondScreenWithSidebar,
   PreferenceScreenWithSidebar,
-  TestScreenWithSidebar
+  TestScreenWithSidebar,
+  ScreenAccessScenario,
+  ScreenRunScenario,
+  ScreenPrepareOnTheGo,
+  ScreenWorkOnDb,
+  ScreenAccessDocu,
+  ScreenCultureHints 
+
 } from '@/renderer/screens'
 
 export default createRouter({
@@ -15,6 +22,48 @@ export default createRouter({
       component: MainScreenWithSidebar,
       meta: {
         titleKey: 'title.main'
+      }
+    },
+    {
+      path: '/accessscenario',
+      component: ScreenAccessScenario /* ScreenAccessScenario */,
+      meta: {
+        titleKey: 'title.accessscenario'
+      }
+    },
+    {
+      path: '/runscenario',
+      component: ScreenRunScenario,
+      meta: {
+        titleKey: 'title.runscenario'
+      }
+    },
+    {
+      path: '/prepareonthego',
+      component: ScreenPrepareOnTheGo,
+      meta: {
+        titleKey: 'title.prepareonthego'
+      }
+    },
+    {
+      path: '/workondb',
+      component: ScreenWorkOnDb,
+      meta: {
+        titleKey: 'title.workondb'
+      }
+    },
+    {
+      path: '/accessdocu',
+      component: ScreenAccessDocu,
+      meta: {
+        titleKey: 'title.accessdocu'
+      }
+    },
+    {
+      path: '/culturehints',
+      component: ScreenCultureHints,
+      meta: {
+        titleKey: 'title.culturehints'
       }
     },
     {
