@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <link
+    href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
+    rel="stylesheet"
+    />
+  <link
+    href="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.css"
+    rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+</head>
+  <body>
+    <div id="app"></div>
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.js"></script>
+      <script type="text/x-template" id="app-template">
+      <v-app>
+        <v-layout class="rounded rounded-md">
+          <v-navigation-drawer
+            image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+            theme="dark"
+            permanent
+            :rail="v_rail"
+            >
+            <v-list nav>
+              <v-list-item prepend-icon="mdi-file-cabinet" title="Access Scenario" value="AccessScenario" @click.stop="v_rail = !v_rail"></v-list-item>
+              <v-list-item prepend-icon="mdi-movie-open" title="Run a Scenario" value="RunScenario" @click.stop="v_rail = !v_rail"></v-list-item>
+              <v-list-item prepend-icon="mdi-run-fast" title="Prepare on-the-go" value="OnTheGo"  @click.stop="v_rail = !v_rail"></v-list-item>
+              <v-list-item prepend-icon="mdi-database-edit" title="Work on a Database" value="WorkOnDatabase"  @click.stop="v_rail = !v_rail"></v-list-item>
+              <v-list-item prepend-icon="mdi-book-open-outline" title="Access Documentation" value="AccessDocumentation" @click.stop="testMethod"></v-list-item>
+              <v-list-item prepend-icon="mdi-handshake" title="Culture Hints" value="CultureHints" @click.stop="testMethod"></v-list-item>
+            </v-list>
+          </v-navigation-drawer>
+      
+          <!--v-app-bar title="Application bar"></v-app-bar-->
+      
+          <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+            <!--Main Content-->
+            <v-sheet
+              :elevation="4"
+              :height="672"
+              :width="600"
+              border
+              color="grey"
+              rounded
+            >
+              <v-card
+              class="mx-auto"
+              max-width="400"
+              height=80%
+              hover
+              >
+              <v-card-item>
+                <v-card-title>
+                  The Basic Ideas for Aqua
+                </v-card-title>
+                <v-card-subtitle>
+                  Introduction
+                </v-card-subtitle>
+              </v-card-item>
+              <v-card-text>
+                Acqua is built on the fundamental understanding of statistical distributions in human behavior.
+                Recognizing that individuals tend to follow patterns, Acqua leverages statistical tools to calculate and anticipate potential outcomes in communication scenarios.
+                This statistical approach serves as a valuable tool for users to make informed decisions based on likely outcomes.
+                Rather than attempting to predict success, Acqua focuses on calculating "what is going to happen."
+                By analyzing statistical trends and behavioral patterns, Acqua empowers users to anticipate the probable course of communication events.
+                This calculated approach provides a strategic advantage, allowing users to navigate through interactions with foresight and adaptability.
+                In the fluid language of omnidaptivity, expressions like identifying blind spots, handling uncertainty, and optimizing preparations become the notes that compose the symphony of successful communication.
+                Acqua, with its dual meanings and statistical underpinnings, emerges as the instrument that harmonizes these expressions, turning the unpredictable path of communication into a well-guided journey.
+              </v-card-text>
+            </v-card>
+
+            <v-card
+              class="mx-auto"
+              max-width="400"
+              height=20%
+              hover
+              >
+              <v-spacer></v-spacer>
+              <v-btn color="surface-variant" icon="mdi-bookmark" size="small" variant="text"></v-btn>
+              <v-btn color="surface-variant" icon="mdi-home" size="small" variant="text"></v-btn>
+              <v-pagination :length="4"></v-pagination>
+            </v-card>
+          </v-sheet>
+          </v-main>
+        </v-layout>
+      </v-app>
+    </script>
+    <script>
+      // Vue Section
+      const { createApp } = Vue;
+      const { createVuetify } = Vuetify;
+
+      const vuetify = createVuetify();
+      const app = createApp({
+        template: "#app-template", 
+        data() {
+          return {
+            v_rail: false
+          }
+        },
+        /*computed: {
+          items() {
+            return this.$store.state.items;
+          },
+          name() {
+            return this.$store.state.name;
+          }
+        },*/
+        methods: {
+          testMethod() {
+            console.log('Dies ist ein Test');
+            this.v_rail = !this.v_rail
+          }/*,
+          boop() {
+            console.log('booop');
+            console.log('test', this.test);
+          },*/
+        }
+      })
+        .use(vuetify)
+        .mount("#app");
+    </script>
+  </body>
+</html>

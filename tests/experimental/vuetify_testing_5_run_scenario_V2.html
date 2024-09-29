@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <link
+    href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
+    rel="stylesheet"
+    />
+  <link
+    href="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.css"
+    rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    
+</head>
+  <body>
+    <script type="module">
+      window.addEventListener("DOMContentLoaded", () => 
+        import("https://unpkg.com/mathlive?module").then((mathlive) => 
+          mathlive.renderMathInDocument()
+        )
+      );
+    </script>
+    <div id="app"></div>
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.js"></script>
+      <script type="text/x-template" id="app-template">
+      <v-app>
+        <v-layout class="rounded rounded-md">
+          <v-navigation-drawer
+            image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+            theme="dark"
+            permanent
+            :rail="v_rail"
+            >
+            <v-list nav>
+              <v-list-item prepend-icon="mdi-file-cabinet" title="Access Scenario" value="AccessScenario" @click.stop="v_rail = !v_rail"></v-list-item>
+              <v-list-item prepend-icon="mdi-movie-open" title="Run a Scenario" value="RunScenario" @click.stop="v_rail = !v_rail"></v-list-item>
+              <v-list-item prepend-icon="mdi-run" title="Prepare on-the-go" value="OnTheGo"  @click.stop="v_rail = !v_rail"></v-list-item>
+              <v-list-item prepend-icon="mdi-database-edit" title="Work on a Database" value="WorkOnDatabase"  @click.stop="v_rail = !v_rail"></v-list-item>
+              <v-list-item prepend-icon="mdi-book-open-outline" title="Access Documentation" value="AccessDocumentation" @click.stop="testMethod"></v-list-item>
+              <v-list-item prepend-icon="mdi-handshake" title="Culture Hints" value="CultureHints" @click.stop="testMethod"></v-list-item>
+            </v-list>
+          </v-navigation-drawer>
+      
+          <!--v-app-bar title="Application bar"></v-app-bar-->
+          <v-main class="d-flex "> <!-- align-center justify-center -->
+            <!--Main Content-->
+            <v-container class="white">
+              <v-row class="mb-3" no-gutters>
+                <v-col cols="6" class="bg-red">
+                  First left
+                  <math-field>f(x)=</math-field>
+                  <math-field>f(x) = \sin(x+\pi)</math-field>
+                  <v-sheet class="pa-2 ma-2" :elevation="4" border color="bg-surface-variant" rounded>
+                    Sheet First left
+                  </v-sheet>
+                  <!-- here the sub container starts -->
+                  <v-container>
+                    <v-row style="min-height: 150px;" class="bg-pink">
+                      <v-col cols="9">
+                        Hierarchy chart
+                      </v-col>
+                      <v-col cols="3">
+                        Buttons
+                      </v-col>
+                    </v-row>
+                    <v-row style="min-height: 50px;" class="bg-orange">
+                      <v-col cols="6">
+                        Run Scenario
+                      </v-col>
+                      <v-col cols="6">
+                        Append Scenario
+                      </v-col>
+                    </v-row>
+                    <v-row style="min-height: 600px;" class="bg-blue">
+                      <v-col cols="6">
+                        Difference Charts
+                      </v-col>
+                      <v-col cols="6">
+                        Weights
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                  <!-- here the subcontainer ends -->
+                </v-col>
+                <v-col cols="2" class="bg-green">
+                  Second
+                  <v-sheet class="pa-2 ma-2" :elevation="4" :height="672" :width="200" border color="bg-surface-variant" rounded>
+                    Sheet second
+                  </v-sheet>
+                </v-col>
+                <v-col cols="4" class="bg-yellow">
+                  Third
+                  <v-sheet class="pa-2 ma-2" :elevation="4" :height="672" :width="200" border color="bg-surface-variant" rounded>
+                    Sheet 1 third
+                  </v-sheet>
+                </v-col>
+                <!--v-col align-self="end" cols="6">
+                  <v-sheet class="pa-2 ma-2" :elevation="4" :height="672" :width="300" border color="bg-surface-variant" rounded>
+                    Sheet 2 third
+                  </v-sheet>
+                </v-col-->
+              </v-row>
+            </v-container>
+          </v-main>
+        </v-layout>
+      </v-app>
+    </script>
+    <script>
+      // Vue Section
+      const { createApp } = Vue;
+      const { createVuetify } = Vuetify;
+
+      const vuetify = createVuetify();
+      const app = createApp({
+        template: "#app-template", 
+        data() {
+          return {
+            v_rail: false
+          }
+        },
+        /*computed: {
+          items() {
+            return this.$store.state.items;
+          },
+          name() {
+            return this.$store.state.name;
+          }
+        },*/
+        methods: {
+          testMethod() {
+            console.log('Dies ist ein Test');
+            this.v_rail = !this.v_rail
+          }/*,
+          boop() {
+            console.log('booop');
+            console.log('test', this.test);
+          },*/
+        }
+      })
+        .use(vuetify)
+        .mount("#app");
+    </script>
+  </body>
+</html>
