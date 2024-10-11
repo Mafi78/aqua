@@ -42,7 +42,7 @@
     "vue": "^3.3.4",
     "vue-i18n": "^9.4.1",
     "vue-router": "^4.2.5",
-    "vuetify": "^3.3.17"
+    "vuetify": "^3.5.10"
   },
   "devDependencies": {
     "@mdi/font": "^7.2.96",
@@ -73,7 +73,7 @@
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-vuetify": "^1.0.2",
     "vue-eslint-parser": "^9.3.1",
-    "vue-tsc": "^1.8.14",
+    "vue-tsc": "^2.1.6",
     "xvfb-maybe": "^0.2.1"
   }
 }
