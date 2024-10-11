@@ -118,37 +118,37 @@
                         <tr>
                             <td>Entity #1</td>
                             <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn></td>
-                            <td style="height: 50px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
+                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
                             <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></td>
                         </tr>
                         <tr>
                             <td>Entity #2</td>
                             <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn></td>
-                            <td style="height: 50px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
+                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
                             <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></td>
                         </tr>
                         <tr>
                             <td>Entity #3</td>
                             <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn></td>
-                            <td style="height: 50px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
+                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
                             <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></td>
                         </tr>
                         <tr>
                             <td>Entity #4</td>
                             <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn></td>
-                            <td style="height: 50px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
+                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
                             <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></td>
                         </tr>
                         <tr>
                             <td>Entity #5</td>
                             <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn></td>
-                            <td style="height: 50px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
+                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
                             <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></td>
                         </tr>
                         <tr>
                             <td>Entity #6</td>
                             <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn></td>
-                            <td style="height: 50px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
+                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
                             <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></td>
                         </tr>
                     </tbody>
@@ -166,114 +166,129 @@
                     Characteristic and Value
                   
                     <!-- Table with compact density, fixed header, and scrollable body -->
-                    <v-table density="compact" class="custom-bordered-table" height="500px" fixed-header>
+                    <v-table dense class="custom-bordered-table" height="500px" fixed-header>
                       <tbody class="scrollable-body">
                         <!-- Example characteristic rows -->
-                        <tr style="height: 100px;" >
+                        <tr>
                             <td>
-                              <h5>Split</h5>
-                                <v-number-input control-variant="split"></v-number-input>
+                              <v-number-input
+                              :reverse="false"
+                              controlVariant="split"
+                              label="Shared understanding"
+                              :hideInput="false"
+                              inset
+                              variant="outlined"
+                              rounded
+                              density="compact"
+                              class="v-number-input"
+                              placeholder="22"
+                            ></v-number-input>
                             </td>
                         </tr>
-                          <tr>
-                            <td>
-                            <v-text-field
-                              density="compact"
-                              label="Shared understanding" 
-                              variant="outlined"
-                              type="number"
-                              placeholder="22"
-                              class="custom-text-field"
-                            ></v-text-field>
+                        <tr>
+                          <td>
+                            <v-number-input
+                            :reverse="false"
+                            controlVariant="split"
+                            label="Performance feedback"
+                            :hideInput="false"
+                            inset
+                            variant="outlined"
+                            rounded
+                            class="custom-text-field"
+                            placeholder="55"
+                          ></v-number-input>
+                          </td>
+                      </tr>
+                        <tr>
+                          <td>
+                            <v-number-input
+                            :reverse="false"
+                            controlVariant="split"
+                            label="Influencing narrative"
+                            :hideInput="false"
+                            inset
+                            variant="outlined"
+                            rounded
+                            class="custom-text-field"
+                            placeholder="76"
+                          ></v-number-input>
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <v-text-field
-                              density="compact"
-                              label="Performance feedback" 
-                              variant="outlined"
-                              type="number"
-                              placeholder="55"
-                              class="custom-text-field"
-                            ></v-text-field>
+                            <v-number-input
+                            :reverse="false"
+                            controlVariant="split"
+                            label="Leadership style"
+                            :hideInput="false"
+                            inset
+                            variant="outlined"
+                            rounded
+                            class="custom-text-field"
+                            placeholder="12"
+                          ></v-number-input>
+                          </td>
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <v-text-field
-                              density="compact"
-                              label="Influencing narrative" 
-                              variant="outlined"
-                              type="number"
-                              placeholder="76"
-                              class="custom-text-field"
-                            ></v-text-field>
+                            <v-number-input
+                            :reverse="false"
+                            controlVariant="split"
+                            label="Decision-making approach"
+                            :hideInput="false"
+                            inset
+                            variant="outlined"
+                            rounded
+                            class="custom-text-field"
+                            placeholder="45"
+                          ></v-number-input>
                           </td>
                         </tr>
-                  
                         <tr>
-                          <td class="td-flex-center">
-                            <v-text-field
-                              density="compact"
-                              label="Leadership style" 
-                              variant="outlined"
-                              type="number"
-                              placeholder="12"
-                              class="custom-text-field"
-                            ></v-text-field>
+                          <td>
+                            <v-number-input
+                            :reverse="false"
+                            controlVariant="split"
+                            label="Relationship foundation"
+                            :hideInput="false"
+                            inset
+                            variant="outlined"
+                            rounded
+                            class="custom-text-field"
+                            placeholder="88"
+                          ></v-number-input>
                           </td>
                         </tr>
-                  
                         <tr>
-                          <td class="td-flex-center">
-                            <v-text-field
-                              density="compact"
-                              label="Decision-making approach" 
-                              variant="outlined"
-                              type="number"
-                              placeholder="45"
-                              class="custom-text-field"
-                            ></v-text-field>
+                          <td>
+                            <v-number-input
+                            :reverse="false"
+                            controlVariant="split"
+                            label="Conflict resolution"
+                            :hideInput="false"
+                            inset
+                            variant="outlined"
+                            rounded
+                            class="custom-text-field"
+                            placeholder="33"
+                          ></v-number-input>
                           </td>
                         </tr>
-                  
                         <tr>
-                          <td class="td-flex-center">
-                            <v-text-field
-                              density="compact"
-                              label="Relationship foundation" 
-                              variant="outlined"
-                              type="number"
-                              placeholder="88"
-                              class="custom-text-field"
-                            ></v-text-field>
-                          </td>
-                        </tr>
-                  
-                        <tr>
-                          <td class="td-flex-center">
-                            <v-text-field
-                              density="compact"
-                              label="Conflict resolution" 
-                              variant="outlined"
-                              type="number"
-                              placeholder="32"
-                              class="custom-text-field"
-                            ></v-text-field>
-                          </td>
-                        </tr>
-                  
-                        <tr>
-                          <td class="td-flex-center">
-                            <v-text-field
-                              density="compact"
-                              label="Time management" 
-                              variant="outlined"
-                              type="number"
-                              placeholder="5"
-                              class="custom-text-field"
-                            ></v-text-field>
+                          <td>
+                            <v-number-input
+                            :reverse="false"
+                            controlVariant="split"
+                            label="Time management"
+                            :hideInput="false"
+                            inset
+                            variant="outlined"
+                            rounded
+                            class="custom-text-field"
+                            placeholder="5"
+                          ></v-number-input>
                           </td>
                         </tr>
                       </tbody>

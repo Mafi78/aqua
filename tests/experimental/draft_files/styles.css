@@ -125,3 +125,10 @@
     padding: 8px 8px; /* Less padding for compactness */
   }
   
+  .v-number-input * {
+    --v-input-control-height: 32px;
+    --v-input-padding-top: 0px;
+    --v-field-input-padding-bottom: 0px;
+    --v-field-padding-bottom: 0px;
+    font-size: 12px; /* Adjust the font size of the label */
+  }
