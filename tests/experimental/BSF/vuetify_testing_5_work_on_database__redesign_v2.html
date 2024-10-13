@@ -72,11 +72,11 @@
                 
                 <!-- Action buttons (Save and Clone) -->
                 <v-col cols="2" class="d-flex justify-end">
-                  <v-btn icon="mdi-content-save-outline" density="comfortable">
-                    <v-tooltip location="top">Save</v-tooltip>
+                  <v-btn icon="mdi-content-save-outline" density="comfortable" style="margin-right: 5px;"><v-icon color="black"></v-icon>
+                    <v-tooltip location="bottom">Save</v-tooltip>
                   </v-btn>
-                  <v-btn icon="mdi-content-duplicate" density="comfortable">
-                    <v-tooltip location="top">Clone</v-tooltip>
+                  <v-btn icon="mdi-content-duplicate" density="comfortable"><v-icon color="black"></v-icon>
+                    <v-tooltip location="bottom">Clone</v-tooltip>
                   </v-btn>
                 </v-col>
               </v-row>
@@ -90,12 +90,12 @@
                   This Database contains "xyz" entries.
                   
                   <!-- Table to display entities and actions -->
-                  <v-table height="300px" fixed-header>
+                  <v-table height="400px" fixed-header>
                     <thead>
                         <tr>
-                            <th style="width: 250px; padding-bottom: 5px;" class="text-left">Entity</th>
-                            <th style="width: 40px; padding-bottom: 5px;" class="text-center">Edit</th>
-                            <th style="width: 80px; padding-bottom: 5px;" class="text-center">Actions
+                            <th style="width: 250px; padding-bottom: 5px; background-color: #f5f5f5;" class="text-left">Entity</th>
+                            <th style="width: 40px; padding-bottom: 5px; background-color: #f5f5f5;" class="text-center">Edit</th>
+                            <th style="width: 80px; padding-bottom: 5px; background-color: #f5f5f5;" class="text-center">Actions
                                 <div style="display: flex; justify-content: space-around;"> <!-- Flexbox for icons -->
                                     <v-btn icon="mdi-check-bold" density="small" class="pa-1" @click="selectAllExports" style="margin-right: 3px;">
                                       <v-icon color="black" size="small"></v-icon>
@@ -111,46 +111,46 @@
                                     </v-btn>
                                   </div>
                             </th>
-                            <th style="width: 40px; padding-bottom: 5px;" class="text-center">Delete</th>
+                            <th style="width: 40px; padding-bottom: 5px; background-color: #f5f5f5;" class="text-center">Delete</th>
                         </tr>
                     </thead>
                     <tbody class="table-body">
                         <tr>
                             <td>Entity #1</td>
-                            <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn></td>
-                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
-                            <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></td>
+                            <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn><v-tooltip activator="parent" location="start">Edit entry</v-tooltip></td>
+                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn><v-tooltip activator="parent" location="start">Select entry</v-tooltip></td>
+                            <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></v-btn><v-tooltip activator="parent" location="start">Delete entry</v-tooltip></td>
                         </tr>
                         <tr>
                             <td>Entity #2</td>
-                            <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn></td>
-                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
-                            <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></td>
+                            <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn><v-tooltip activator="parent" location="start">Edit entry</v-tooltip></td>
+                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn><v-tooltip activator="parent" location="start">Select entry</v-tooltip></td>
+                            <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></v-btn><v-tooltip activator="parent" location="start">Delete entry</v-tooltip></td>
                         </tr>
                         <tr>
-                            <td>Entity #3</td>
-                            <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn></td>
-                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
-                            <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></td>
-                        </tr>
-                        <tr>
-                            <td>Entity #4</td>
-                            <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn></td>
-                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
-                            <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></td>
-                        </tr>
-                        <tr>
-                            <td>Entity #5</td>
-                            <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn></td>
-                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
-                            <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></td>
-                        </tr>
-                        <tr>
-                            <td>Entity #6</td>
-                            <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn></td>
-                            <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn></td>
-                            <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></td>
-                        </tr>
+                          <td>Entity #3</td>
+                          <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn><v-tooltip activator="parent" location="start">Edit entry</v-tooltip></td>
+                          <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn><v-tooltip activator="parent" location="start">Select entry</v-tooltip></td>
+                          <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></v-btn><v-tooltip activator="parent" location="start">Delete entry</v-tooltip></td>
+                      </tr>
+                      <tr>
+                        <td>Entity #4</td>
+                        <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn><v-tooltip activator="parent" location="start">Edit entry</v-tooltip></td>
+                        <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn><v-tooltip activator="parent" location="start">Select entry</v-tooltip></td>
+                        <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></v-btn><v-tooltip activator="parent" location="start">Delete entry</v-tooltip></td>
+                    </tr>
+                    <tr>
+                      <td>Entity #5</td>
+                      <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn><v-tooltip activator="parent" location="start">Edit entry</v-tooltip></td>
+                      <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn><v-tooltip activator="parent" location="start">Select entry</v-tooltip></td>
+                      <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></v-btn><v-tooltip activator="parent" location="start">Delete entry</v-tooltip></td>
+                  </tr>
+                  <tr>
+                    <td>Entity #6</td>
+                    <td class="text-center"><v-btn icon="mdi-file-edit-outline" density="comfortable" variant="plain"></v-btn><v-tooltip activator="parent" location="start">Edit entry</v-tooltip></td>
+                    <td style="height: 60px;" class="checkbox-cell"><v-checkbox-btn inline></v-checkbox-btn><v-tooltip activator="parent" location="start">Select entry</v-tooltip></td>
+                    <td class="text-center"><v-btn icon="mdi-trash-can-outline" density="comfortable" variant="plain"></v-btn><v-tooltip activator="parent" location="start">Delete entry</v-tooltip></td>
+                </tr>
                     </tbody>
                     </v-table>
                   
@@ -158,20 +158,26 @@
                   <div class="static-footer">
                     <v-btn class="add-entry-button">Add new entry</v-btn>
                   </div>                  
-
                 </v-col>
 
                 <!-- Middle Column: Characteristics and Values -->
                 <v-col cols="3" class="bg-green pa-2">
                     Characteristic and Value
                   
-                    <!-- Table with compact density, fixed header, and scrollable body -->
-                    <v-table dense class="custom-bordered-table" height="500px" fixed-header>
-                      <tbody class="scrollable-body">
-                        <!-- Example characteristic rows -->
+                  <!-- Table to display/edit characteristics and values -->
+                  <!-- Compact density, fixed header -->
+                  <v-table density="compact" class="custom-bordered-table" height="600px" fixed-header>
+                    <thead>
                         <tr>
-                            <td>
-                              <v-number-input
+                            <th style="width: 210px; padding-bottom: 5px; background-color: #f5f5f5;" class="text-center">Entity name here</th>
+                        </tr>
+                    </thead>
+                    <!-- Add scrollable body -->
+                    <tbody class="scrollable-body">
+                    <!-- Example characteristic rows -->
+                    <tr>
+                      <td class="custom-text-field">
+                        <v-number-input
                               :reverse="false"
                               controlVariant="split"
                               label="Shared understanding"
@@ -180,113 +186,127 @@
                               variant="outlined"
                               rounded
                               density="compact"
+                              width="200"
                               class="v-number-input"
                               placeholder="22"
                             ></v-number-input>
-                            </td>
-                        </tr>
+                      </td>  
+                    </tr>
                         <tr>
-                          <td>
+                          <td class="custom-text-field">
                             <v-number-input
                             :reverse="false"
                             controlVariant="split"
                             label="Performance feedback"
                             :hideInput="false"
-                            inset
-                            variant="outlined"
-                            rounded
-                            class="custom-text-field"
+                              inset
+                              variant="outlined"
+                              rounded
+                              density="compact"
+                              width="200"
+                              class="v-number-input"
                             placeholder="55"
                           ></v-number-input>
                           </td>
                       </tr>
                         <tr>
-                          <td>
+                          <td class="custom-text-field">
                             <v-number-input
                             :reverse="false"
                             controlVariant="split"
                             label="Influencing narrative"
                             :hideInput="false"
-                            inset
-                            variant="outlined"
-                            rounded
-                            class="custom-text-field"
+                              inset
+                              variant="outlined"
+                              rounded
+                              density="compact"
+                              width="200"
+                              class="v-number-input"
                             placeholder="76"
                           ></v-number-input>
                           </td>
                         </tr>
                         <tr>
-                          <td>
+                          <td class="custom-text-field">
                             <v-number-input
                             :reverse="false"
                             controlVariant="split"
                             label="Leadership style"
                             :hideInput="false"
-                            inset
-                            variant="outlined"
-                            rounded
-                            class="custom-text-field"
+                              inset
+                              variant="outlined"
+                              rounded
+                              density="compact"
+                              width="200"
+                              class="v-number-input"
                             placeholder="12"
                           ></v-number-input>
                           </td>
-                          </td>
                         </tr>
                         <tr>
-                          <td>
+                          <td class="custom-text-field">
                             <v-number-input
                             :reverse="false"
                             controlVariant="split"
                             label="Decision-making approach"
                             :hideInput="false"
-                            inset
-                            variant="outlined"
-                            rounded
-                            class="custom-text-field"
+                              inset
+                              variant="outlined"
+                              rounded
+                              density="compact"
+                              width="200"
+                              class="v-number-input"
                             placeholder="45"
                           ></v-number-input>
                           </td>
                         </tr>
                         <tr>
-                          <td>
+                          <td class="custom-text-field">
                             <v-number-input
                             :reverse="false"
                             controlVariant="split"
                             label="Relationship foundation"
                             :hideInput="false"
-                            inset
-                            variant="outlined"
-                            rounded
-                            class="custom-text-field"
+                              inset
+                              variant="outlined"
+                              rounded
+                              density="compact"
+                              width="200"
+                              class="v-number-input"
                             placeholder="88"
                           ></v-number-input>
                           </td>
                         </tr>
                         <tr>
-                          <td>
+                          <td class="custom-text-field">
                             <v-number-input
                             :reverse="false"
                             controlVariant="split"
                             label="Conflict resolution"
                             :hideInput="false"
-                            inset
-                            variant="outlined"
-                            rounded
-                            class="custom-text-field"
+                              inset
+                              variant="outlined"
+                              rounded
+                              density="compact"
+                              width="200"
+                              class="v-number-input"
                             placeholder="33"
                           ></v-number-input>
                           </td>
                         </tr>
                         <tr>
-                          <td>
+                          <td class="custom-text-field">
                             <v-number-input
                             :reverse="false"
                             controlVariant="split"
                             label="Time management"
                             :hideInput="false"
-                            inset
-                            variant="outlined"
-                            rounded
-                            class="custom-text-field"
+                              inset
+                              variant="outlined"
+                              rounded
+                              density="compact"
+                              width="200"
+                              class="v-number-input"
                             placeholder="5"
                           ></v-number-input>
                           </td>
@@ -294,66 +314,88 @@
                       </tbody>
                     </v-table>
                   </v-col>
-                                   
-
-                  <!-- Notes Section -->
-                  <!-- <v-textarea
-                    v-model="notes"
-                    label="Notes"
-                    rows="4"
-                    outlined
-                    placeholder="Add your notes here..."
-                  ></v-textarea> -->
 
                 <!-- Right Column: Scenarios Section -->
                 <v-col cols="4" class="bg-yellow pa-2">
-                  Scenarios based on this Database
-                  <v-table density="compact">
+                  Scenarios based on this database
+                  <!-- Table to display/edit characteristics and values -->
+                  <!-- Compact density, fixed header -->
+                  <v-table density="compact" class="custom-bordered-table mb-4" height="400px" fixed-header>
                     <thead>
-                      <tr>
-                        <th>Scenario</th>
-                        <th>Latest Edit</th>
-                        <th class="text-center">Update</th>
-                      </tr>
+                        <tr>
+                          <th style="width: 100px; padding-bottom: 5px; background-color: #f5f5f5;">Scenario</th>
+                          <th style="width: 100px; padding-bottom: 5px; background-color: #f5f5f5;">Last Edited</th>
+                          <th style="width: 100px; padding-bottom: 5px; background-color: #f5f5f5;" class="text-center">Update</th> 
+                        </tr>
                     </thead>
-                    <tbody>
+                    <!-- Add scrollable body -->
+                    <tbody class="scrollable-body">
                       <!-- Example scenarios -->
                       <tr>
-                        <td>Scenario 1</td>
-                        <td>19.04.2024</td>
-                        <td class="text-center">
-                          <v-btn icon="mdi-update" density="comfortable"></v-btn>
+                        <td style="width: 100px">Scenario 1</td>
+                        <td style="width: 100px">19.04.2024</td>
+                        <td style="width: 100px" class="td-flex-center">
+                              <!-- Lock Button -->
+                              <v-btn icon density="comfortable" variant="plain" @click="toggleLock" class="mr-2">
+                                <v-icon>{{ isLocked ? 'mdi-lock' : 'mdi-lock-open' }}</v-icon>
+                              </v-btn>
+                              
+                              <!-- Update Button -->
+                              <v-btn icon density="comfortable" variant="plain" :disabled="isLocked" @click="updateData">
+                                <v-icon color="grey" v-if="isLocked">mdi-update</v-icon>
+                                <v-icon v-else>mdi-update</v-icon>
+                              </v-btn>
                         </td>
                       </tr>
                       <tr>
-                        <td>Scenario 2</td>
-                        <td>21.02.2024</td>
-                        <td class="text-center">
-                          <v-btn icon="mdi-update" density="comfortable"></v-btn>
+                        <td style="width: 100px">Scenario 2</td>
+                        <td style="width: 100px">26.04.2024</td>
+                        <td style="width: 100px" class="td-flex-center">
+                              <!-- Lock Button -->
+                              <v-btn icon density="comfortable" variant="plain" @click="toggleLock" class="mr-2">
+                                <v-icon>{{ isLocked ? 'mdi-lock' : 'mdi-lock-open' }}</v-icon>
+                              </v-btn>
+                              
+                              <!-- Update Button -->
+                              <v-btn icon density="comfortable" variant="plain" :disabled="isLocked" @click="updateData">
+                                <v-icon color="grey" v-if="isLocked">mdi-update</v-icon>
+                                <v-icon v-else>mdi-update</v-icon>
+                              </v-btn>
                         </td>
                       </tr>
                       <tr>
-                        <td>Scenario 3</td>
-                        <td>12.03.2024</td>
-                        <td class="text-center">
-                          <v-btn icon="mdi-update" density="comfortable"></v-btn>
+                        <td style="width: 100px">Scenario 3</td>
+                        <td style="width: 100px">15.06.2024</td>
+                        <td style="width: 100px" class="td-flex-center">
+                              <!-- Lock Button -->
+                              <v-btn icon density="comfortable" variant="plain" @click="toggleLock" class="mr-2">
+                                <v-icon>{{ isLocked ? 'mdi-lock' : 'mdi-lock-open' }}</v-icon>
+                              </v-btn>
+                              
+                              <!-- Update Button -->
+                              <v-btn icon density="comfortable" variant="plain" :disabled="isLocked" @click="updateData">
+                                <v-icon color="grey" v-if="isLocked">mdi-update</v-icon>
+                                <v-icon v-else>mdi-update</v-icon>
+                              </v-btn>
                         </td>
                       </tr>
                     </tbody>
                   </v-table>
 
                   <!-- Toggleable Notes Section -->
-                  <v-btn @click="showNotes = !showNotes" icon>
+                  <v-btn @click="showNotes = !showNotes" icon density="comfortable" variant="flat">
                     <v-icon>{{ showNotes ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
                   </v-btn>
-                  <span>Notes</span>
+                  <span> Notes</span>
                   <v-expand-transition>
-                    <div v-if="showNotes">
+                    <div v-if="showNotes" class="mt-4">
                       <v-textarea
                         v-model="scenarioNotes"
-                        label="Notes"
+                        label="Add your notes here"
                         rows="2"
+                        bg-color="white"
                         outlined
+                        auto-grow
                       ></v-textarea>
                     </div>
                   </v-expand-transition>
@@ -367,39 +409,49 @@
     </script>
 
     <!-- Vue Application Initialization -->
-    <script>
-      const { createApp } = Vue;
-      const { createVuetify } = Vuetify;
+<script>
+  const { createApp } = Vue;
+  const { createVuetify } = Vuetify;
 
-      const vuetify = createVuetify();
-      const app = createApp({
-        template: "#app-template",
-        data() {
-          return {
-            v_rail: false, // Controls navigation drawer
-            showNotes: false, // Notes visibility toggle for the scenario map
-            performanceFeedback: '',
-            influencingNarrative: '',
-            leadershipStyle: '',
-            notes: '', // Holds the value for notes in the middle section
-            scenarioNotes: '' // Holds the value for scenario notes in the right column
-          };
-        },
-        methods: {
-          selectAllExports() {
-            console.log("Select all exports");
-          },
-          deselectAllExports() {
-            console.log("Deselect all exports");
-          },
-          exportSelected() {
-            console.log("Export selected items");
-          }
-        },
-      });
+  const vuetify = createVuetify();
+  const app = createApp({
+    template: "#app-template",
+    data() {
+      return {
+        v_rail: false, // Controls navigation drawer
+        showNotes: false, // Notes visibility toggle for the scenario map
+        performanceFeedback: '',
+        influencingNarrative: '',
+        leadershipStyle: '',
+        notes: '', // Holds the value for notes in the middle section
+        scenarioNotes: '', // Holds the value for scenario notes in the right column
+        isLocked: true, // Initial state: locked (for lock and update button)
+      };
+    },
+    methods: {
+      selectAllExports() {
+        console.log("Select all exports");
+      },
+      deselectAllExports() {
+        console.log("Deselect all exports");
+      },
+      exportSelected() {
+        console.log("Export selected items");
+      },
+      toggleLock() {
+        this.isLocked = !this.isLocked; // Toggle the lock state
+      },
+      updateData() {
+        if (!this.isLocked) {
+          console.log("Update button clicked.");
+        }
+      },
+    },
+  });
 
-      app.use(vuetify).mount("#app");
-    </script>
+  app.use(vuetify).mount("#app");
+</script>
+
 
   </body>
 </html>

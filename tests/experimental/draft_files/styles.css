@@ -84,6 +84,14 @@
     align-items: center;       /* Vertical centering */
     height: 50%; /* Ensure full height alignment */
   }
+
+  /* Flexbox left-aligning for table cells */
+  .td-flex-left {
+    display: flex;
+    justify-content: left;  /* Horizontal centering */
+    align-items: center;       /* Vertical centering */
+    height: 50%; /* Ensure full height alignment */
+  }
   
   /* Custom styling for text fields */
   .custom-text-field {
@@ -130,5 +138,5 @@
     --v-input-padding-top: 0px;
     --v-field-input-padding-bottom: 0px;
     --v-field-padding-bottom: 0px;
-    font-size: 12px; /* Adjust the font size of the label */
+    font-size: 10px; /* Adjust the font size of the label */
   }
