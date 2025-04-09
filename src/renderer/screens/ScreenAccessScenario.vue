@@ -1,17 +1,16 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { BasicApp } from '@/renderer/components/layout'
 
-import { useRoute /*, useRouter */} from 'vue-router'
+import { useRoute /*, useRouter */ } from 'vue-router'
 const route: any = useRoute()
 const titleKey: string = (route?.meta?.titleKey || 'title.main') as string
-
-
 </script>
 
 <template>
   <BasicApp>
-    <!--v-main class="d-flex " --> <!-- align-center justify-center -->
-          <!--Main Content-->
+    <!--v-main class="d-flex " -->
+    <!-- align-center justify-center -->
+    <!--Main Content-->
     <v-container class="white">
       <v-row class="mb-3" height="50">
         <!--Top Left><-->
@@ -38,8 +37,6 @@ const titleKey: string = (route?.meta?.titleKey || 'title.main') as string
       </v-row>
       To be continued
     </v-container>
-        <!--/v-main-->
+    <!--/v-main-->
   </BasicApp>
 </template>
-
-

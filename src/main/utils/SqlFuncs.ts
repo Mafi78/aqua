@@ -10,7 +10,10 @@ import {
 } from './SqlBaseModule'
 import { Database } from 'sqlite3'
 
+// https://www.codecademy.com/learn/learn-node-sqlite/modules/learn-node-sqlite-module/cheatsheet
+
 export default class sqlFuncs {
+
   // this has to be called one time at the beginnin for every DB
   static getDBObject(Para1inside: DBQueryInObject) {
     const sqlite3 = require('sqlite3')
@@ -37,7 +40,6 @@ export default class sqlFuncs {
     return db
   }
 
-  // static async getData(Para1inside: DBQueryInObject): Promise<any> {
   static async getData(Para1inside: DBQueryInObject): Promise<DBValueOutObject> {
     console.log('Para1_inside:')
     console.log(Para1inside)
@@ -52,35 +54,51 @@ export default class sqlFuncs {
       db = Constants.dbDataObject
     }
 
-    // execute the statement
-    return new Promise<DBValueOutObject>((resolve, reject) => {
-      db.all(Para1inside.sInQuerySql, (err, rows) => {
-        let dbRetObj = new DBValueOutObject()
-        if (err) {
-          dbRetObj.retMessage = err.message + ' for SQL ' + Para1inside.sInQuerySql
-          dbRetObj.retStatus = EnumRetStatus.Error
-          GeneralFuncs.appendErrorLogAndAppNotification(dbRetObj.retMessage)
-          reject(dbRetObj)
-        } else {
-          dbRetObj.retStatus = EnumRetStatus.OK
-          dbRetObj.retObject = rows
-          resolve(dbRetObj)
-        }
+    // check if ParameterArray is null
+    if (Para1inside.aInParameter === null || Para1inside.aInParameter === undefined) {
+      // execute the statement
+      return new Promise<DBValueOutObject>((resolve, reject) => {
+        db.all(Para1inside.sInQuerySql, (err, rows) => {
+          let dbRetObj = new DBValueOutObject()
+          if (err) {
+            dbRetObj.retMessage = err.message + ' for SQL ' + Para1inside.sInQuerySql
+            dbRetObj.retErrorMessage = dbRetObj.retMessage
+            dbRetObj.retStatus = EnumRetStatus.Error
+            GeneralFuncs.appendErrorLogAndAppNotification(dbRetObj.retMessage)
+            reject(dbRetObj)
+          } else {
+            dbRetObj.retStatus = EnumRetStatus.OK
+            dbRetObj.retObject = rows
+            resolve(dbRetObj)
+          }
+        })
       })
-    })
+    } else {
+      // das obige Beispiel mit Parameterwerten
+      return new Promise<DBValueOutObject>((resolve, reject) => {
+        const params = ['value1', 'value2']
+        db.all(Para1inside.sInQuerySql, Para1inside.aInParameter, (err, rows) => {
+          let dbRetObj = new DBValueOutObject()
+          if (err != null) {
+            dbRetObj.retMessage = err.message + ' for SQL ' + Para1inside.sInQuerySql
+            dbRetObj.retErrorMessage = dbRetObj.retMessage
+            dbRetObj.retStatus = EnumRetStatus.Error
+            GeneralFuncs.appendErrorLogAndAppNotification(dbRetObj.retMessage)
+            reject(dbRetObj);
+            //resolve(dbRetObj)
+          } else {
+            // else case is the normal behaviour - no exceptions happened
+            dbRetObj.retStatus = EnumRetStatus.OK
+            dbRetObj.retObject = rows;
+            resolve(dbRetObj)
+          }
+        })
+      })
+    }
   }
 
-  // static async executeSQLSingle(Para1inside: DBQueryInObject): Promise<DBValueOutObject> {
   static async executeSQL(Para1inside: DBQueryInObject): Promise<DBValueOutObject> {
     // console.log(Para1inside)
-    /*
-    // no arrays are allowed to pass anymore :(
-    if (Para1inside.sInQuerySql != null) {
-      console.log('DBStatement executeSQL: ', Para1inside.sInQuerySql)
-    } else {
-      console.log('DBStatement executeSQLArray passed (hopefully)')
-    }
-    */
 
     let db = null
     if (Para1inside.sInDBName == EnumDbNames.Pref) {
@@ -96,11 +114,11 @@ export default class sqlFuncs {
         db.exec(Para1inside.sInQuerySql, (err) => {
           let dbRetObj = new DBValueOutObject()
           if (err != null) {
-            dbRetObj.retMessage = err.message + ' for SQL ' + Para1inside.sInQuerySql
+            dbRetObj.retMessage = err.message + ' for SQL "' + Para1inside.sInQuerySql + '"'
+            dbRetObj.retErrorMessage = dbRetObj.retMessage
             dbRetObj.retStatus = EnumRetStatus.Error
             GeneralFuncs.appendErrorLogAndAppNotification(dbRetObj.retMessage)
-            //reject(dbRetObj);
-            resolve(dbRetObj)
+            reject(dbRetObj);
           } else {
             // else case is the normal behaviour - no exceptions happened
             dbRetObj.retStatus = EnumRetStatus.OK
@@ -112,22 +130,43 @@ export default class sqlFuncs {
     } else {
       // call it with parameters
       return new Promise<DBValueOutObject>((resolve, reject) => {
-        const params = ['value1', 'value2']
+        const params = ['value1', 'value2'];
+        db.run(Para1inside.sInQuerySql, Para1inside.aInParameter, function (err){
+          let dbRetObj = new DBValueOutObject()
+          if (err != null) {
+            dbRetObj.retMessage = err.message + ' for SQL ' + Para1inside.sInQuerySql
+            dbRetObj.retErrorMessage = dbRetObj.retMessage
+            dbRetObj.retStatus = EnumRetStatus.Error
+            GeneralFuncs.appendErrorLogAndAppNotification(dbRetObj.retMessage)
+            reject(dbRetObj);
+            //resolve(dbRetObj)
+          } else {
+            // else case is the normal behaviour - no exceptions happened
+            dbRetObj.retStatus = EnumRetStatus.OK
+            //dbRetObj.retMessage = this.lastID;
+            dbRetObj.retObject = this;
+            resolve(dbRetObj)
+          }
+        })
+        /*
         db.run(Para1inside.sInQuerySql, Para1inside.aInParameter, (err) => {
           let dbRetObj = new DBValueOutObject()
           if (err != null) {
             dbRetObj.retMessage = err.message + ' for SQL ' + Para1inside.sInQuerySql
+            dbRetObj.retErrorMessage = dbRetObj.retMessage
             dbRetObj.retStatus = EnumRetStatus.Error
             GeneralFuncs.appendErrorLogAndAppNotification(dbRetObj.retMessage)
-            //reject(dbRetObj);
-            resolve(dbRetObj)
+            reject(dbRetObj);
+            //resolve(dbRetObj)
           } else {
             // else case is the normal behaviour - no exceptions happened
             dbRetObj.retStatus = EnumRetStatus.OK
+            dbRetObj.retMessage = this.lastID;
             // dbRetObj.retObject = rows;
             resolve(dbRetObj)
           }
         })
+        */
       })
     }
   }

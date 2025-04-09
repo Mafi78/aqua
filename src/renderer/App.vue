@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 // import { CleanLayout } from '@/renderer/components/layout'
 import { onMounted, ref, onRenderTriggered } from 'vue'
 import { useRouter } from 'vue-router'

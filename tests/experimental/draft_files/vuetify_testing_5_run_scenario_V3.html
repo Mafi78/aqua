@@ -1,28 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-  <link
-    href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
-    rel="stylesheet"
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
+      rel="stylesheet"
     />
-  <link
-    href="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.css"
-    rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-</head>
+  </head>
   <body>
     <script type="module">
-      window.addEventListener("DOMContentLoaded", () => 
-        import("https://unpkg.com/mathlive?module").then((mathlive) => 
+      window.addEventListener('DOMContentLoaded', () =>
+        import('https://unpkg.com/mathlive?module').then((mathlive) =>
           mathlive.renderMathInDocument()
         )
-      );
+      )
     </script>
     <div id="app"></div>
-      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.js"></script>
-      <script type="text/x-template" id="app-template">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.js"></script>
+    <script type="text/x-template" id="app-template">
       <v-app>
         <v-layout class="rounded rounded-md">
           <v-navigation-drawer
@@ -40,7 +37,7 @@
               <v-list-item prepend-icon="mdi-handshake" title="Culture Hints" value="CultureHints" @click.stop="testMethod"></v-list-item>
             </v-list>
           </v-navigation-drawer>
-      
+
           <!--v-app-bar title="Application bar"></v-app-bar-->
           <v-main class="d-flex "> <!-- align-center justify-center -->
             <!--Main Content-->
@@ -53,8 +50,8 @@
                       <tr>
                       Scenario name here + associated database
                       </tr>
-                    </t-body>  
-                  </v-table>  
+                    </t-body>
+                  </v-table>
                   <!-- here the sub container starts -->
                   <v-container>
                     <v-row style="min-height: 100px;" class="bg-pink">
@@ -65,8 +62,8 @@
                               <v-select label="Select Sender" :items="['Country A', 'Region A', 'City A']"></v-select>
                               <v-select label="Select Receiver" :items="['Country B', 'Region B', 'City B']"></v-select>
                             </tr>
-                          </t-body>  
-                        </v-table>  
+                          </t-body>
+                        </v-table>
                       </v-col>
                       <v-col cols="2">
                         <v-btn density="comfortable" icon="mdi-content-save-outline" :ripple="true">
@@ -307,8 +304,8 @@
                           <td>72%</td>
                           <td>High</td>
                         </tr>
-                      </t-body>  
-                    </v-table>  
+                      </t-body>
+                    </v-table>
                     <v-table density="compact">
                       <thead>
                         <tr>
@@ -392,12 +389,12 @@
     </script>
     <script>
       // Vue Section
-      const { createApp } = Vue;
-      const { createVuetify } = Vuetify;
+      const { createApp } = Vue
+      const { createVuetify } = Vuetify
 
-      const vuetify = createVuetify();
+      const vuetify = createVuetify()
       const app = createApp({
-        template: "#app-template", 
+        template: '#app-template',
         data() {
           return {
             v_rail: false
@@ -413,9 +410,9 @@
         },*/
         methods: {
           testMethod() {
-            console.log('Dies ist ein Test');
+            console.log('Dies ist ein Test')
             this.v_rail = !this.v_rail
-          }/*,
+          } /*,
           boop() {
             console.log('booop');
             console.log('test', this.test);
@@ -423,159 +420,155 @@
         }
       })
         .use(vuetify)
-        .mount("#app");
+        .mount('#app')
     </script>
     <script>
       var testdate = [
-          {
-            rating: 1,
-            items: ["Duration"]
-          },
-          {
-            rating: 3,
-            items: ["Duration"]
-          },
-          {
-            rating: 3,
-            items: ["Duration"]
-          },
-          {
-            rating: 5,
-            items: ["Duration"]
-          },
-          {
-            rating: 5,
-            items: ["Duration"]
-          },
-          {
-            rating: 1,
-            items: ["Duration"]
-          },
-          {
-            rating: 4,
-            items: ["Duration", 'Testing']
-          },
-          {
-            rating: 4,
-            items: ["Audience"]
-          },
-          {
-            rating: 1,
-            items: ["Audience"]
-          },
-          {
-            rating: 5,
-            items: ["Reasoning", "Reasoning"]
-          },
-          {
-            rating: 2,
-            items: ["Audience", "Reasoning", "Duration", "Slides"]
-          },
-          {
-            rating: 1,
-            items: ["Duration", "Slides"]
-          },
-          {
-            rating: 4,
-            items: ["Audience", "Slides"]
-          },
-          {
-            rating: 5,
-            items: ["Reasoning"]
-          },
-          {
-            rating: 2,
-            items: ["Speed", "Reasoning"]
-          },
-          {
-            rating: 5,
-            items: ["Slides", "Audience"]
-          },
-          {
-            rating: 3,
-            items: ["Slides"]
-          },
-          {
-            rating: 1,
-            items: ["Speed", "Duration", "Slides"]
-          },
-          {
-            rating: 5,
-            items: ["Agenda", "Slides"]
-          },
-          {
-            rating: 5,
-            items: ["Speed", "Audience"]
-          },
-          {
-            rating: 3,
-            items: ["Speed", "Tone"]
-          },
-          {
-            rating: 5,
-            items: ["Tone", "Slides"]
-          },
-          {
-            rating: 6,
-            items: ["Tone", "Slides"]
-          },
-          {
-            rating: 6,
-            items: ["Testing"]
-          }
-        ];
+        {
+          rating: 1,
+          items: ['Duration']
+        },
+        {
+          rating: 3,
+          items: ['Duration']
+        },
+        {
+          rating: 3,
+          items: ['Duration']
+        },
+        {
+          rating: 5,
+          items: ['Duration']
+        },
+        {
+          rating: 5,
+          items: ['Duration']
+        },
+        {
+          rating: 1,
+          items: ['Duration']
+        },
+        {
+          rating: 4,
+          items: ['Duration', 'Testing']
+        },
+        {
+          rating: 4,
+          items: ['Audience']
+        },
+        {
+          rating: 1,
+          items: ['Audience']
+        },
+        {
+          rating: 5,
+          items: ['Reasoning', 'Reasoning']
+        },
+        {
+          rating: 2,
+          items: ['Audience', 'Reasoning', 'Duration', 'Slides']
+        },
+        {
+          rating: 1,
+          items: ['Duration', 'Slides']
+        },
+        {
+          rating: 4,
+          items: ['Audience', 'Slides']
+        },
+        {
+          rating: 5,
+          items: ['Reasoning']
+        },
+        {
+          rating: 2,
+          items: ['Speed', 'Reasoning']
+        },
+        {
+          rating: 5,
+          items: ['Slides', 'Audience']
+        },
+        {
+          rating: 3,
+          items: ['Slides']
+        },
+        {
+          rating: 1,
+          items: ['Speed', 'Duration', 'Slides']
+        },
+        {
+          rating: 5,
+          items: ['Agenda', 'Slides']
+        },
+        {
+          rating: 5,
+          items: ['Speed', 'Audience']
+        },
+        {
+          rating: 3,
+          items: ['Speed', 'Tone']
+        },
+        {
+          rating: 5,
+          items: ['Tone', 'Slides']
+        },
+        {
+          rating: 6,
+          items: ['Tone', 'Slides']
+        },
+        {
+          rating: 6,
+          items: ['Testing']
+        }
+      ]
 
       // reshape data
       //const data = getData().reduce((result, { rating, items }) => {
       const data = testdate.reduce((result, { rating, items }) => {
         return items.reduce((res, item) => {
-          const foundIndex = res.findIndex(
-            (r) => r.name === item && r.category === rating
-          );
+          const foundIndex = res.findIndex((r) => r.name === item && r.category === rating)
 
           if (foundIndex !== -1) {
-            res[foundIndex].value++;
-            return res;
+            res[foundIndex].value++
+            return res
           }
-          return [...res, { name: item, category: rating, value: 1 }];
-        }, result);
-      }, []);
+          return [...res, { name: item, category: rating, value: 1 }]
+        }, result)
+      }, [])
 
       const options = {
-        format: "",
-        negative: "← Do less",
-        positive: "Do more →",
+        format: '',
+        negative: '← Do less',
+        positive: 'Do more →',
         negatives: [1, 2, 3, 4],
         positives: [5, 6],
         colors: {
-          1: "#63171B",
-          2: "#F56565",
-          3: "#ED8936",
-          4: "#ECC94B",
-          5: "#48BB78",
-          6: "#00FF00"
+          1: '#63171B',
+          2: '#F56565',
+          3: '#ED8936',
+          4: '#ECC94B',
+          5: '#48BB78',
+          6: '#00FF00'
         }
-      };
+      }
 
       const maxCountOfTypes = data.reduce((result, { name, value }) => {
-        result[name] = value + (result[name] ? result[name] : 0);
-        return result;
-      }, {});
-      const maxCountOfAType = Math.max(...Object.values(maxCountOfTypes));
+        result[name] = value + (result[name] ? result[name] : 0)
+        return result
+      }, {})
+      const maxCountOfAType = Math.max(...Object.values(maxCountOfTypes))
 
-      const width = 750;
+      const width = 750
 
-      const margin = { top: 50, right: 30, bottom: 0, left: 80 };
+      const margin = { top: 50, right: 30, bottom: 0, left: 80 }
       const signs = new Map([
         ...options.negatives.map((d) => [d, -1]),
         ...options.positives.map((d) => [d, +1])
-      ]);
+      ])
       const series = d3
         .stack()
         .keys([].concat(options.negatives.slice().reverse(), options.positives))
-        .value(
-          ([, value], category) => signs.get(category) * (value.get(category) || 0)
-        )
+        .value(([, value], category) => signs.get(category) * (value.get(category) || 0))
         .offset(d3.stackOffsetDiverging)(
         d3.rollups(
           data,
@@ -587,7 +580,7 @@
             ),
           (d) => d.name
         )
-      );
+      )
 
       const bias = d3
         .rollups(
@@ -595,33 +588,33 @@
           (v) => d3.sum(v, (d) => d.value * Math.min(0, signs.get(d.category))),
           (d) => d.name
         )
-        .sort(([, a], [, b]) => d3.ascending(a, b));
+        .sort(([, a], [, b]) => d3.ascending(a, b))
 
-      const height = bias.length * 33 + margin.top + margin.bottom;
+      const height = bias.length * 33 + margin.top + margin.bottom
 
       const getColor = (key) => {
-        return options.colors[key];
-      };
+        return options.colors[key]
+      }
 
       const x = d3
         .scaleLinear()
         .domain(d3.extent(series.flat(2)))
-        .rangeRound([margin.left, width - margin.right]);
+        .rangeRound([margin.left, width - margin.right])
 
       const y = d3
         .scaleBand()
         .domain(bias.map(([name]) => name))
         .rangeRound([margin.top, height - margin.bottom])
-        .padding(2 / 33);
+        .padding(2 / 33)
 
       const formatValue = () => {
-        const format = d3.format(options.format || "");
-        return (x) => format(Math.abs(x));
-      };
+        const format = d3.format(options.format || '')
+        return (x) => format(Math.abs(x))
+      }
 
       const xAxis = (g) =>
         g
-          .attr("transform", `translate(0,${margin.top})`)
+          .attr('transform', `translate(0,${margin.top})`)
           .call(
             d3
               .axisTop(x)
@@ -629,73 +622,72 @@
               .tickFormat(formatValue())
               .tickSizeOuter(0)
           )
-          .call((g) => g.select(".domain").remove())
+          .call((g) => g.select('.domain').remove())
           .call((g) =>
             g
-              .append("text")
-              .attr("x", x(0) + 20)
-              .attr("y", -24)
-              .attr("fill", "currentColor")
-              .attr("text-anchor", "start")
+              .append('text')
+              .attr('x', x(0) + 20)
+              .attr('y', -24)
+              .attr('fill', 'currentColor')
+              .attr('text-anchor', 'start')
               .text(options.positive)
           )
           .call((g) =>
             g
-              .append("text")
-              .attr("x", x(0) - 20)
-              .attr("y", -24)
-              .attr("fill", "currentColor")
-              .attr("text-anchor", "end")
+              .append('text')
+              .attr('x', x(0) - 20)
+              .attr('y', -24)
+              .attr('fill', 'currentColor')
+              .attr('text-anchor', 'end')
               .text(options.negative)
-          );
+          )
 
       const yAxis = (g) =>
         g
           .call(d3.axisLeft(y).tickSizeOuter(0))
           .call((g) =>
             g
-              .selectAll(".tick")
+              .selectAll('.tick')
               .data(bias)
               .attr(
-                "transform",
+                'transform',
                 ([name, min]) => `translate(${x(min)},${y(name) + y.bandwidth() / 2})`
               )
           )
-          .call((g) => g.select(".domain").attr("transform", `translate(${x(0)},0)`));
+          .call((g) => g.select('.domain').attr('transform', `translate(${x(0)},0)`))
 
       const chart = () => {
-        const svg = d3.create("svg").attr("viewBox", [0, 0, width, height]);
+        const svg = d3.create('svg').attr('viewBox', [0, 0, width, height])
 
         svg
-          .append("g")
-          .selectAll("g")
+          .append('g')
+          .selectAll('g')
           .data(series)
-          .join("g")
-          .attr("fill", (d) => getColor(d.key))
-          .selectAll("rect")
+          .join('g')
+          .attr('fill', (d) => getColor(d.key))
+          .selectAll('rect')
           .data((d) => d.map((v) => Object.assign(v, { key: d.key })))
-          .join("rect")
-          .attr("x", (d) => x(d[0]))
-          .attr("y", ({ data: [name] }) => y(name))
-          .attr("width", (d) => x(d[1]) - x(d[0]))
-          .attr("height", y.bandwidth())
-          .append("title")
+          .join('rect')
+          .attr('x', (d) => x(d[0]))
+          .attr('y', ({ data: [name] }) => y(name))
+          .attr('width', (d) => x(d[1]) - x(d[0]))
+          .attr('height', y.bandwidth())
+          .append('title')
           .text(
             ({ key, data: [name, value] }) => `${name}
       ${formatValue(value.get(key))} ${key}`
-          );
+          )
 
-        svg.append("g").call(xAxis);
+        svg.append('g').call(xAxis)
 
-        svg.append("g").call(yAxis);
+        svg.append('g').call(yAxis)
 
-        return svg.node();
-      };
+        return svg.node()
+      }
 
       //document.body.appendChild(chart());
-      var test = document.getElementById("d3app");
-      test.appendChild(chart());
-
+      var test = document.getElementById('d3app')
+      test.appendChild(chart())
     </script>
   </body>
 </html>

@@ -1,28 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-  <link
-    href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
-    rel="stylesheet"
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
+      rel="stylesheet"
     />
-  <link
-    href="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.css"
-    rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/d3@3"></script>
-</head>
+  </head>
   <body>
     <script type="module">
-      window.addEventListener("DOMContentLoaded", () => 
-        import("https://unpkg.com/mathlive?module").then((mathlive) => 
+      window.addEventListener('DOMContentLoaded', () =>
+        import('https://unpkg.com/mathlive?module').then((mathlive) =>
           mathlive.renderMathInDocument()
         )
-      );
+      )
     </script>
     <div id="app"></div>
-      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.js"></script>
-      <script type="text/x-template" id="app-template">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.js"></script>
+    <script type="text/x-template" id="app-template">
       <v-app>
         <v-layout class="rounded rounded-md">
           <v-navigation-drawer
@@ -42,7 +39,7 @@
               <v-list-item prepend-icon="mdi-unfold-more-vertical" title="" value="ExpandMinimize" @click.stop="testMethod"></v-list-item>
             </v-list>
           </v-navigation-drawer>
-      
+
           <!--v-app-bar title="Application bar"></v-app-bar-->
           <v-main class="d-flex "> <!-- align-center justify-center -->
             <!--Main Content-->
@@ -55,8 +52,8 @@
                       <tr>
                       Scenario name here + associated database
                       </tr>
-                    </t-body>  
-                  </v-table>  
+                    </t-body>
+                  </v-table>
                   <!-- here the sub container starts -->
                   <v-container>
                     <v-row style="min-height: 100px;" class="bg-pink">
@@ -67,8 +64,8 @@
                               <v-select density="compact" label="Select Sender" :items="['Country A', 'Region A', 'City A']"></v-select>
                               <v-select density="compact" label="Select Receiver" :items="['Country B', 'Region B', 'City B']"></v-select>
                             </tr>
-                          </t-body>  
-                        </v-table>  
+                          </t-body>
+                        </v-table>
                       </v-col>
                       <v-col cols="2">
                         <v-btn density="comfortable" icon="mdi-movie-plus" :ripple="true">
@@ -310,8 +307,8 @@
                           <td>72%</td>
                           <td>High</td>
                         </tr>
-                      </t-body>  
-                    </v-table>  
+                      </t-body>
+                    </v-table>
                     <v-table density="compact">
                       <thead>
                         <tr>
@@ -395,12 +392,12 @@
     </script>
     <script>
       // Vue Section
-      const { createApp } = Vue;
-      const { createVuetify } = Vuetify;
+      const { createApp } = Vue
+      const { createVuetify } = Vuetify
 
-      const vuetify = createVuetify();
+      const vuetify = createVuetify()
       const app = createApp({
-        template: "#app-template", 
+        template: '#app-template',
         data() {
           return {
             v_rail: false
@@ -416,9 +413,9 @@
         },*/
         methods: {
           testMethod() {
-            console.log('Dies ist ein Test');
+            console.log('Dies ist ein Test')
             this.v_rail = !this.v_rail
-          }/*,
+          } /*,
           boop() {
             console.log('booop');
             console.log('test', this.test);
@@ -426,42 +423,43 @@
         }
       })
         .use(vuetify)
-        .mount("#app");
+        .mount('#app')
     </script>
     <script>
-  var margin = {top: 50, right: 20, bottom: 10, left: 105},
-    width = 500 - margin.left - margin.right,
-    height = 800 - margin.top - margin.bottom;
+      var margin = { top: 50, right: 20, bottom: 10, left: 105 },
+        width = 500 - margin.left - margin.right,
+        height = 800 - margin.top - margin.bottom
 
-  var y = d3.scale.ordinal()
-    .rangeRoundBands([0, height], .3);
+      var y = d3.scale.ordinal().rangeRoundBands([0, height], 0.3)
 
-  var x = d3.scale.linear()
-    .rangeRound([0, width]);
+      var x = d3.scale.linear().rangeRound([0, width])
 
-  var color = d3.scale.ordinal()
-    .range(["#c7001e", "#f6a580", "#cccccc", "#92c6db", "#086fad"]);
+      var color = d3.scale.ordinal().range(['#c7001e', '#f6a580', '#cccccc', '#92c6db', '#086fad'])
 
-  var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("top");
+      var xAxis = d3.svg.axis().scale(x).orient('top')
 
-  var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
+      var yAxis = d3.svg.axis().scale(y).orient('left')
 
-  var svg = d3.select("#d3app").append("svg")
-    .attr("viewBox", "0,0,800,800")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .attr("id", "d3-plot")
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      var svg = d3
+        .select('#d3app')
+        .append('svg')
+        .attr('viewBox', '0,0,800,800')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .attr('id', 'd3-plot')
+        .append('g')
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-  color.domain(["Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"]);
+      color.domain([
+        'Strongly disagree',
+        'Disagree',
+        'Neither agree nor disagree',
+        'Agree',
+        'Strongly agree'
+      ])
 
-  // Content of csv file
-  /*
+      // Content of csv file
+      /*
   Question,1,2,3,4,5,N
   Question 1,24,294,594,1927,376,3215
   Question 2,2,2,0,7,0,11
@@ -473,122 +471,159 @@
   Question 8,0,0,0,0,2,2
 */
 
-  d3.csv("https://raw.githubusercontent.com/wpoely86/D3.js-Diverging-Stacked-Bar-Chart/master/raw_data.csv", function(error, data) {
+      d3.csv(
+        'https://raw.githubusercontent.com/wpoely86/D3.js-Diverging-Stacked-Bar-Chart/master/raw_data.csv',
+        function (error, data) {
+          data.forEach(function (d) {
+            // calc percentages
+            d['Strongly disagree'] = (+d[1] * 100) / d.N
+            d['Disagree'] = (+d[2] * 100) / d.N
+            d['Neither agree nor disagree'] = (+d[3] * 100) / d.N
+            d['Agree'] = (+d[4] * 100) / d.N
+            d['Strongly agree'] = (+d[5] * 100) / d.N
+            var x0 =
+              -1 * (d['Neither agree nor disagree'] / 2 + d['Disagree'] + d['Strongly disagree'])
+            var idx = 0
+            d.boxes = color.domain().map(function (name) {
+              return { name: name, x0: x0, x1: (x0 += +d[name]), N: +d.N, n: +d[(idx += 1)] }
+            })
+          })
 
-    data.forEach(function(d) {
-        // calc percentages
-        d["Strongly disagree"] = +d[1]*100/d.N;
-        d["Disagree"] = +d[2]*100/d.N;
-        d["Neither agree nor disagree"] = +d[3]*100/d.N;
-        d["Agree"] = +d[4]*100/d.N;
-        d["Strongly agree"] = +d[5]*100/d.N;
-        var x0 = -1*(d["Neither agree nor disagree"]/2+d["Disagree"]+d["Strongly disagree"]);
-        var idx = 0;
-        d.boxes = color.domain().map(function(name) { return {name: name, x0: x0, x1: x0 += +d[name], N: +d.N, n: +d[idx += 1]}; });
-      });
+          var min_val = d3.min(data, function (d) {
+            return d.boxes['0'].x0
+          })
 
-      var min_val = d3.min(data, function(d) {
-              return d.boxes["0"].x0;
-              });
+          var max_val = d3.max(data, function (d) {
+            return d.boxes['4'].x1
+          })
 
-      var max_val = d3.max(data, function(d) {
-              return d.boxes["4"].x1;
-              });
+          x.domain([min_val, max_val]).nice()
+          y.domain(
+            data.map(function (d) {
+              return d.Question
+            })
+          )
 
-      x.domain([min_val, max_val]).nice();
-      y.domain(data.map(function(d) { return d.Question; }));
+          svg.append('g').attr('class', 'x axis').call(xAxis)
 
-      svg.append("g")
-          .attr("class", "x axis")
-          .call(xAxis);
+          svg.append('g').attr('class', 'y axis').call(yAxis)
 
-      svg.append("g")
-          .attr("class", "y axis")
-          .call(yAxis)
+          var vakken = svg
+            .selectAll('.question')
+            .data(data)
+            .enter()
+            .append('g')
+            .attr('class', 'bar')
+            .attr('transform', function (d) {
+              return 'translate(0,' + y(d.Question) + ')'
+            })
 
-      var vakken = svg.selectAll(".question")
-          .data(data)
-        .enter().append("g")
-          .attr("class", "bar")
-          .attr("transform", function(d) { return "translate(0," + y(d.Question) + ")"; });
+          var bars = vakken
+            .selectAll('rect')
+            .data(function (d) {
+              return d.boxes
+            })
+            .enter()
+            .append('g')
+            .attr('class', 'subbar')
 
-      var bars = vakken.selectAll("rect")
-          .data(function(d) { return d.boxes; })
-        .enter().append("g").attr("class", "subbar");
+          bars
+            .append('rect')
+            .attr('height', y.rangeBand())
+            .attr('x', function (d) {
+              return x(d.x0)
+            })
+            .attr('width', function (d) {
+              return x(d.x1) - x(d.x0)
+            })
+            .style('fill', function (d) {
+              return color(d.name)
+            })
 
-      bars.append("rect")
-          .attr("height", y.rangeBand())
-          .attr("x", function(d) { return x(d.x0); })
-          .attr("width", function(d) { return x(d.x1) - x(d.x0); })
-          .style("fill", function(d) { return color(d.name); });
+          bars
+            .append('text')
+            .attr('x', function (d) {
+              return x(d.x0)
+            })
+            .attr('y', y.rangeBand() / 2)
+            .attr('dy', '0.5em')
+            .attr('dx', '0.5em')
+            .style('font', '10px sans-serif')
+            .style('text-anchor', 'begin')
+            .text(function (d) {
+              return d.n !== 0 && d.x1 - d.x0 > 3 ? d.n : ''
+            })
 
-      bars.append("text")
-          .attr("x", function(d) { return x(d.x0); })
-          .attr("y", y.rangeBand()/2)
-          .attr("dy", "0.5em")
-          .attr("dx", "0.5em")
-          .style("font" ,"10px sans-serif")
-          .style("text-anchor", "begin")
-          .text(function(d) { return d.n !== 0 && (d.x1-d.x0)>3 ? d.n : "" });
+          vakken
+            .insert('rect', ':first-child')
+            .attr('height', y.rangeBand())
+            .attr('x', '1')
+            .attr('width', width)
+            //.attr("fill-opacity", "0.5")
+            .attr('fill-opacity', '0')
+            .style('fill', '#F5F5F5')
+            .attr('class', function (d, index) {
+              return index % 2 == 0 ? 'even' : 'uneven'
+            })
 
-      vakken.insert("rect",":first-child")
-          .attr("height", y.rangeBand())
-          .attr("x", "1")
-          .attr("width", width)
-          //.attr("fill-opacity", "0.5")
-          .attr("fill-opacity", "0")
-          .style("fill", "#F5F5F5")
-          .attr("class", function(d,index) { return index%2==0 ? "even" : "uneven"; });
+          svg
+            .append('g')
+            .attr('class', 'y axis')
+            .append('line')
+            .attr('x1', x(0))
+            .attr('x2', x(0))
+            .attr('y2', height)
 
-      svg.append("g")
-          .attr("class", "y axis")
-      .append("line")
-          .attr("x1", x(0))
-          .attr("x2", x(0))
-          .attr("y2", height);
+          var startp = svg.append('g').attr('class', 'legendbox').attr('id', 'mylegendbox')
+          // this is not nice, we should calculate the bounding box and use that
+          var legend_tabs = [0, 120, 200, 375, 450]
+          var legend = startp
+            .selectAll('.legend')
+            .data(color.domain().slice())
+            .enter()
+            .append('g')
+            .attr('class', 'legend')
+            .attr('transform', function (d, i) {
+              return 'translate(' + legend_tabs[i] + ',-45)'
+            })
 
-      var startp = svg.append("g").attr("class", "legendbox").attr("id", "mylegendbox");
-      // this is not nice, we should calculate the bounding box and use that
-      var legend_tabs = [0, 120, 200, 375, 450];
-      var legend = startp.selectAll(".legend")
-          .data(color.domain().slice())
-        .enter().append("g")
-          .attr("class", "legend")
-          .attr("transform", function(d, i) { return "translate(" + legend_tabs[i] + ",-45)"; });
+          legend
+            .append('rect')
+            .attr('x', 0)
+            .attr('width', 18)
+            .attr('height', 18)
+            .style('fill', color)
 
-      legend.append("rect")
-          .attr("x", 0)
-          .attr("width", 18)
-          .attr("height", 18)
-          .style("fill", color);
+          legend
+            .append('text')
+            .attr('x', 22)
+            .attr('y', 9)
+            .attr('dy', '.35em')
+            .style('text-anchor', 'begin')
+            .style('font', '10px sans-serif')
+            .text(function (d) {
+              return d
+            })
 
-      legend.append("text")
-          .attr("x", 22)
-          .attr("y", 9)
-          .attr("dy", ".35em")
-          .style("text-anchor", "begin")
-          .style("font" ,"10px sans-serif")
-          .text(function(d) { return d; });
+          d3.selectAll('.axis path')
+            .style('fill', 'none')
+            .style('stroke', '#000')
+            .style('shape-rendering', 'crispEdges')
 
-      d3.selectAll(".axis path")
-          .style("fill", "none")
-          .style("stroke", "#000")
-          .style("shape-rendering", "crispEdges")
+          d3.selectAll('.axis line')
+            .style('fill', 'none')
+            .style('stroke', '#000')
+            .style('shape-rendering', 'crispEdges')
 
-      d3.selectAll(".axis line")
-          .style("fill", "none")
-          .style("stroke", "#000")
-          .style("shape-rendering", "crispEdges")
+          var movesize = width / 2 - startp.node().getBBox().width / 2
+          d3.selectAll('.legendbox').attr('transform', 'translate(' + movesize + ',0)')
 
-      var movesize = width/2 - startp.node().getBBox().width/2;
-      d3.selectAll(".legendbox").attr("transform", "translate(" + movesize  + ",0)");
-
-      // print the svg in a canvas
-      //var element = document.getElementById('d3-plot');
-      //var svgAsString = new XMLSerializer().serializeToString(element);
-      //canvg(document.getElementById('mycanvas'), svgAsString );
-  });
-
+          // print the svg in a canvas
+          //var element = document.getElementById('d3-plot');
+          //var svgAsString = new XMLSerializer().serializeToString(element);
+          //canvg(document.getElementById('mycanvas'), svgAsString );
+        }
+      )
     </script>
     <script>
       /*

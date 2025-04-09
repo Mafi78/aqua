@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { useTheme } from 'vuetify'
 import { openExternal } from '@/renderer/utils'
@@ -7,12 +7,6 @@ import { storeToRefs } from 'pinia'
 import { onMounted, ref } from 'vue'
 // import ManiSecure from 'ManiSecure'
 import ThirdScreen from '@/renderer/screens/ThirdScreen.vue'
-// import {
-/* DBQueryInObject, EnumDbNames, EnumDbDMLTypes */ /* SQLBaseModule */
-// } from '@/main/utils/SqlBaseModule'
-// import {  /* DBQueryInObject, EnumDbNames, EnumDbDMLTypes */ SQLBaseModule
-// } from './../../main/utils/SqlBaseModule'
-// import DBValueOutObject from '@/main/utils/SqlBaseModule'
 
 import { useRouter } from 'vue-router'
 import * as d3 from 'd3'
@@ -173,12 +167,6 @@ const handleOpenGitHub = async (): Promise<void> => {
 
 const handleSQL = async (): Promise<void> => {
   console.log('handleSQL soll aufgerufen werden')
-  /*
-  const _myReq = new SQLBaseModule.DBQueryInObject()
-  _myReq.sInDBName = SQLBaseModule.EnumDbNames.Data
-  _myReq.sInQueryType = SQLBaseModule.EnumDbDMLTypes.Select
-  _myReq.sInQuerySql = 'SELECT * FROM ' + firstname.value
-  */
   window.mainApi.send('msgRequestSQLData', 'SELECT * FROM ' + firstname.value)
 }
 

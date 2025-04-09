@@ -9,9 +9,10 @@ import {
   ScreenRunScenario,
   ScreenPrepareOnTheGo,
   ScreenWorkOnDb,
+  ScreenWorkOnDbDetail,
   ScreenAccessDocu,
-  ScreenCultureHints 
-
+  ScreenCultureHints,
+  ScreenTest2
 } from '@/renderer/screens'
 
 export default createRouter({
@@ -53,6 +54,13 @@ export default createRouter({
       }
     },
     {
+      path: '/workondbdetail',
+      component: ScreenWorkOnDbDetail,
+      meta: {
+        titleKey: 'title.workondbdetail'
+      }
+    },
+    {
       path: '/accessdocu',
       component: ScreenAccessDocu,
       meta: {
@@ -85,6 +93,13 @@ export default createRouter({
       component: TestScreenWithSidebar,
       meta: {
         titleKey: 'title.test'
+      }
+    },
+    {
+      path: '/test2',
+      component: ScreenTest2,
+      meta: {
+        titleKey: 'title.test2'
       }
     },
     {

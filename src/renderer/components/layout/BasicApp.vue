@@ -1,46 +1,48 @@
-<script setup lang="tsx">
-import HeaderLayout from '@/renderer/components/layout/HeaderLayout.vue'
+<script setup lang="ts">
+// import HeaderLayout from '@/renderer/components/layout/HeaderLayout.vue'
 import { useRouter } from 'vue-router'
-import { ref, computed,  onMounted } from 'vue'
-import { handleRoute, naviElems } from '@/renderer/utils'
-// import { storeLeftMenuBar } from '@/renderer/store/counter'
-// import { storeToRefs } from 'pinia'
+import { ref, onMounted, computed /*, watch */ } from 'vue'
+import { handleRoute /* , naviElems */ } from '@/renderer/utils'
+
+import { useNavStore } from '@/renderer/store/navStore'
+import { useLogStore } from '@/renderer/store/logStore'
+// import { LogStoreObject } from '@/main/utils/IPCBaseModules'
+
+const navStore = useNavStore();
+const logStore = useLogStore();
 
 // const { toggleLMBCollapsed, toggleLMBVisibility /* , changeLMBWidth */ } = storeLeftMenuBar()
-// const { leftStateCollapsed, leftStateVisible, leftWidth } = storeToRefs(storeLeftMenuBar())
-const router = useRouter()
-// const drawer = ref(true)
-// const leftMenuWidth = ref(250)
 
-// Dragable
-/*
-const navigation = ref({
-  shown: true,
-  width: 200,
-  borderSize: 3
-})
-*/
+const router = useRouter()
+
 const AppWidth = ref(0)
 const AppHeight = ref(0)
-// const color = ref('red')
-const vRail = ref(false);
+const vRail = ref(false)
 
 const receivedError = ref('')
 
+
+const showErrorsDialog = ref(false); // Controls ErrorDialog visibility
+
 /*
-const setSliderValue = (val) => {
-  if (val >= 250 && val <= 600) {
-    // leftWidth.value = val;
-    changeLMBWidth(val)
-    // console.log(`END Event ${val}`);
-    color.value = 'green'
-  } else {
-    color.value = 'red'
-  }
-}
+const naviElemFiltered = computed(() => naviElems.filter((naviElem) => naviElem.visible === true))
+*/
+
+// const logObjects = computed(() => logStore.getAllLogs);
+const logObjectsError = computed(() => logStore.getErrorLogs);
+const logObjectsInfo = computed(() => logStore.getInfoLogs);
+// const logObjects = computed(() => logStore.getErrorLogs);
+
+/*
+watch(naviElemFiltered, (newValue, oldValue) => {
+  // debugger
+  testAusgabe.value = `naviElemFiltered changed from "${oldValue}" to "${newValue}"`;
+  console.log(`naviElemFiltered changed from "${oldValue}" to "${newValue}"`);
+});
 */
 
 onMounted((): void => {
+  // Hier wird abgefangen was passiert wenn sich die Groesse des Fenster aendert
   window.mainApi.receive(
     'msgReceivedAppSizeChanged',
     (event: Event, width: number, height: number) => {
@@ -50,142 +52,150 @@ onMounted((): void => {
     }
   )
 
-  window.mainApi.receive('msgReceivedError', (event: Event, text: string) => {
-    // console.log('msgReceivedVersion is called');
-    receivedError.value = text
+  // Hier werden die Error Meldungen abgefangen
+  window.mainApi.receive(
+    'msgReceivedError',
+    (event: Event, text: string) => {
+      console.log('msgReceivedError in BasicApp is called');
+      receivedError.value = text
+      logStore.addLogErrorText(text);
   })
   try {
     //  setBorderWidth(this)
     //  setEvents(this)
   } catch (error) {}
+
+  // Hier werden die Log Einträge aufgefangen
+  window.mainApi.receive(
+    'msgReceivedLogEntries',
+    (event: Event, logText: string) => {
+      // console.log('msgReceivedVersion is called');
+      logStore.addLogInfoText(logText);
+    }
+  )
+
 })
+
+const removeLogItem = async (logId : number): Promise<void> => {
+  logStore.deleteLog(logId);
+}
+
 // End dragable
 
-// v-bottomsheet Eigenschaften
-// const sheet = ref(false)
-/*
-const tiles = [
-  { img: 'keep.png', title: 'Keep' },
-  { img: 'inbox.png', title: 'Inbox' },
-  { img: 'hangouts.png', title: 'Hangouts' },
-  { img: 'messenger.png', title: 'Messenger' },
-  { img: 'google.png', title: 'Google+' }
-]
-*/
-
-const naviElemFiltered = computed(() => naviElems.filter((naviElem) => naviElem.visible === true))
-
-/*
-const toggleBottomVisibility = (): void => {
-  sheet.value = !sheet.value
-}
-*/
+// const naviElemFiltered = computed(() => navStore.getNaviElems.filter((naviElem) => naviElem.visible === true))
 </script>
 
 <template>
   <v-app>
-    <HeaderLayout />
-
-      <v-layout class="rounded rounded-md">
-        <v-navigation-drawer
-          image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-          theme="dark"
-          permanent
-          :rail="vRail"
-          >
-          <!-- v-list nav>
-            <v-list-item prepend-icon="mdi-file-cabinet" title="Access Scenario" value="AccessScenario" @click.stop="vRail = !vRail"></v-list-item>
-            <v-list-item prepend-icon="mdi-movie-open" title="Run a Scenario" value="RunScenario" @click.stop="vRail = !vRail"></v-list-item>
-            <v-list-item prepend-icon="mdi-run-fast" title="Prepare on-the-go" value="OnTheGo"  @click.stop="vRail = !vRail"></v-list-item>
-            <v-list-item prepend-icon="mdi-database-edit" title="Work on a Database" value="WorkOnDatabase"  @click.stop="vRail = !vRail"></v-list-item>
-            <v-list-item prepend-icon="mdi-book-open-outline" title="Access Documentation" value="AccessDocumentation" ></v-list-item>
-            <v-list-item prepend-icon="mdi-handshake" title="Culture Hints" value="CultureHints" ></v-list-item>
-          </v-list -->
-          <v-list>
-            <v-list-item
-              v-for="(item, index) in naviElemFiltered"
-              :key="index"
-              :value="index"
-              :prepend-icon="item.icon"
-              :title="item.title"
-              @click="handleRoute(item.action, router)"
-            >
-            </v-list-item>
-          </v-list>
-        </v-navigation-drawer>
-
-        <v-main>
-          <slot />
-        </v-main>
-
-      </v-layout>
-
-    <!-- v-system-bar height="6" style="padding: 0px 0px 0px; margin: 14px 0px 0px">
-      <v-slider
-        v-model="leftWidth"
-        min="0"
-        :max="AppWidth"
-        style="padding: 0px 0px 0px; margin: 0px 0px 0px"
-        thumb-label="always"
-        :color="color"
-        step="1"
-        @end="setSliderValue"
+    <!--HeaderLayout /-->
+    <v-layout class="rounded rounded-md fill-height" >
+      <v-navigation-drawer
+        image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+        theme="dark"
+        permanent
+        :rail="vRail"
+        app
       >
-      </v-slider>
-    </v-system-bar -->
+        <v-list>
+          <!-- v-for="(item /*, index */ ) in navStore.getNaviElemsFiltered"  -->
+          <v-list-item
+            v-for="(item) in navStore.getNaviElemsFiltered"
+            :key="item.id"
+            :value="item.id"
+            :prepend-icon="item.icon"
+            :title="item.title"
+            @click="handleRoute(item.action, router)"
+          >
+          </v-list-item>
+        </v-list>
+        <v-divider></v-divider>
 
-    <!-- v-navigation-drawer
-      v-model="leftStateVisible"
-      :rail="leftStateCollapsed"
-      permanent
-      :width="leftWidth"
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, index) in naviElemFiltered"
-          :key="index"
-          :value="index"
-          :prepend-icon="item.icon"
-          :title="item.title"
-          @click="handleRoute(item.action, router)"
-        >
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+        <v-divider></v-divider>
+        <v-list v-if="logObjectsInfo.length>0" style="max-height: 200px" class="overflow-y-auto">
+          <v-list-item
+            v-for="(logItem, index) in logObjectsInfo" :key="index"
+            :value="index">
+            <input v-model="logItem.errorId" placeholder="ID" />
+            <input v-model="logItem.errorText" placeholder="Text" />
+            <input v-model="logItem.errorType" placeholder="Type" />
+            <v-btn @click="removeLogItem(logItem.errorId)">Remove</v-btn>
+          </v-list-item>
+        </v-list>
+        <template #append>
+          <div class="pa-2">
+            <v-btn
+              v-if="logObjectsError.length>0"
+              class="ma-2"
+              @click="showErrorsDialog = true"
+            >
+              <v-icon
+                icon="mdi-alert-outline"
+                start
+              ></v-icon>
+              Error
+            </v-btn>
+            <v-btn
+              v-if="logObjectsInfo.length>0"
+              class="ma-2"
+            >
+              <v-icon
+                icon="mdi-information"
+                start
+              ></v-icon>
+              Info
+            </v-btn>
 
-    <v-navigation-drawer location="right" width="199px">
-      <v-list>
-        <v-list-item title="Links verstecken" @click.stop="toggleLMBVisibility()"></v-list-item>
-        <v-list-item title="Links ein/ausklappen" @click.stop="toggleLMBCollapsed()"></v-list-item>
-      </v-list>
+          </div>
+        </template>
+      </v-navigation-drawer>
 
-      <div class="text-center">
-        <v-btn
-          color="purple"
-          size="x-large"
-          text="Click Me"
-          @click.stop="toggleBottomVisibility()"
-        ></v-btn>
-      </div>
-    </v-navigation-drawer>
+      <v-main class="scrollable-main" >
+        <slot />
+      </v-main>
 
-    <v-main>
-      <slot />
-    </v-main>
+      <!-- Insert Dialog start here -->
+      <v-dialog v-model="showErrorsDialog" max-width="500px">
+        <v-card>
+          <!-- Header -->
+          <v-card-title class="d-flex justify-space-between align-center">
+            <span>Dialog Title</span>
+            <v-btn icon="mdi-close" variant="text" @click="showErrorsDialog = false"></v-btn>
+          </v-card-title>
 
-    <v-bottom-sheet v-model="sheet">
-      <v-list>
-        <v-list-subheader>Open in</v-list-subheader>
+          <!-- List Items -->
+          <v-card-text>
+            <v-list>
+              <v-list-item
+                v-for="(logItem, index) in logObjectsError" :key="index"
+                :value="index">
+                <input v-model="logItem.errorId" placeholder="ID" />
+                <input v-model="logItem.errorText" placeholder="Text" />
+                <input v-model="logItem.errorType" placeholder="Type" />
+                <v-btn @click="removeLogItem(logItem.errorId)">Remove</v-btn>
+              </v-list-item>
+            </v-list>
+          </v-card-text>
 
-        <v-list-item
-          v-for="tile in tiles"
-          :key="tile.title"
-          :prepend-avatar="`https://cdn.vuetifyjs.com/images/bottom-sheets/${tile.img}`"
-          :title="tile.title"
-          @click="sheet = false"
-        >
-        </v-list-item>
-      </v-list>
-    </v-bottom-sheet -->
+          <!-- Footer -->
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <span class="text-caption">This is the footer text.</span>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+    </v-layout>
   </v-app>
 </template>
+
+
+<style scoped>
+  .fill-height {
+    height: 100vh !important;
+  }
+
+  .scrollable-main {
+    overflow: auto;
+    height: calc(100vh - 0px); /* Adjust based on your toolbar height */
+  }
+</style>

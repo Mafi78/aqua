@@ -4,7 +4,7 @@ import ElectronPlugin from 'vite-plugin-electron'
 import RendererPlugin from 'vite-plugin-electron-renderer'
 import EslintPlugin from 'vite-plugin-eslint'
 import VuetifyPlugin from 'vite-plugin-vuetify'
-import VueJsx from '@vitejs/plugin-vue-jsx'
+//import VueJsx from '@vitejs/plugin-vue-jsx'
 import Vue from '@vitejs/plugin-vue'
 import { rmSync } from 'fs'
 import { resolve, dirname } from 'path'
@@ -45,7 +45,7 @@ export default defineConfig(({ command, mode }) => {
     },
     plugins: [
       Vue(),
-      VueJsx(),
+      // VueJsx(), // ich glaube nicht, dass es gebraucht wird !
       // Docs: https://github.com/vuetifyjs/vuetify-loader
       VuetifyPlugin({
         autoImport: true

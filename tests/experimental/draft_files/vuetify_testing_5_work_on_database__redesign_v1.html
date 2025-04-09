@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- External Libraries -->
@@ -6,23 +6,24 @@
       href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
       rel="stylesheet"
     />
-    <link
-      href="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script> <!-- D3 Library for data visualization if needed -->
-    
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <!-- D3 Library for data visualization if needed -->
+
     <!-- External script to render math equations -->
     <script type="module">
-      window.addEventListener("DOMContentLoaded", () => 
-        import("https://unpkg.com/mathlive?module").then((mathlive) => 
+      window.addEventListener('DOMContentLoaded', () =>
+        import('https://unpkg.com/mathlive?module').then((mathlive) =>
           mathlive.renderMathInDocument()
         )
-      );
+      )
     </script>
 
     <!-- Link to external CSS file -->
-    <link rel="stylesheet" href="/Users/omnidaptive/Documents/GitHub/aqua/tests/experimental/draft_files/styles.css">
+    <link
+      rel="stylesheet"
+      href="/Users/omnidaptive/Documents/GitHub/aqua/tests/experimental/draft_files/styles.css"
+    />
   </head>
 
   <body>
@@ -38,7 +39,7 @@
       <v-app>
         <!-- Main Layout -->
         <v-layout class="rounded rounded-md">
-          
+
           <!-- Navigation Drawer with Links -->
           <v-navigation-drawer
             image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
@@ -67,7 +68,7 @@
                 <v-col cols="10">
                   <v-breadcrumbs :items="['DATABASE NAME', 'V.x.y', 'DERIVED FROM', 'DATABASE NAME', 'V.y.z']"></v-breadcrumbs>
                 </v-col>
-                
+
                 <!-- Action buttons (Save and Clone) -->
                 <v-col cols="2" class="d-flex justify-end">
                   <v-btn icon="mdi-content-save-outline" density="comfortable">
@@ -81,12 +82,12 @@
 
               <!-- Main content row with three columns -->
               <v-row class="mb-3">
-                
+
                 <!-- Left Column: Database Overview -->
                 <v-col cols="5" class="bg-red pa-2">
                   <!-- Database Entries Information -->
                   This Database contains "xyz" entries.
-                  
+
                   <!-- Table to display entities and actions -->
                   <v-table density="compact" class="custom-bordered-table">
                     <thead class="sticky-header">
@@ -160,11 +161,11 @@
                       <!-- Repeat for other rows -->
                     </tbody>
                   </v-table>
-                  
+
                   <!-- Static Footer Section -->
                   <div class="static-footer">
                     <v-btn class="add-entry-button">Add new entry</v-btn>
-                  </div>                  
+                  </div>
 
                 </v-col>
 
@@ -183,7 +184,7 @@
                       <tr>
                         <td>Performance feedback</td>
                         <td>
-                          <v-text-field 
+                          <v-text-field
                             density="compact"
                             v-model="performanceFeedback"
                             type="number"
@@ -194,7 +195,7 @@
                       <tr>
                         <td>Influencing narrative</td>
                         <td>
-                          <v-text-field 
+                          <v-text-field
                             density="compact"
                             v-model="influencingNarrative"
                             type="number"
@@ -205,7 +206,7 @@
                       <tr>
                         <td>Leadership style</td>
                         <td>
-                          <v-text-field 
+                          <v-text-field
                             density="compact"
                             v-model="leadershipStyle"
                             type="number"
@@ -290,12 +291,12 @@
 
     <!-- Vue Application Initialization -->
     <script>
-      const { createApp } = Vue;
-      const { createVuetify } = Vuetify;
+      const { createApp } = Vue
+      const { createVuetify } = Vuetify
 
-      const vuetify = createVuetify();
+      const vuetify = createVuetify()
       const app = createApp({
-        template: "#app-template",
+        template: '#app-template',
         data() {
           return {
             v_rail: false, // Controls navigation drawer
@@ -305,23 +306,22 @@
             leadershipStyle: '',
             notes: '', // Holds the value for notes in the middle section
             scenarioNotes: '' // Holds the value for scenario notes in the right column
-          };
+          }
         },
         methods: {
           selectAllExports() {
-            console.log("Select all exports");
+            console.log('Select all exports')
           },
           deselectAllExports() {
-            console.log("Deselect all exports");
+            console.log('Deselect all exports')
           },
           exportSelected() {
-            console.log("Export selected items");
+            console.log('Export selected items')
           }
-        },
-      });
+        }
+      })
 
-      app.use(vuetify).mount("#app");
+      app.use(vuetify).mount('#app')
     </script>
-
   </body>
 </html>

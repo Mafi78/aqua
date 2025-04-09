@@ -60,8 +60,90 @@ export default class IPCs {
         })
         .catch((err) => {
           GeneralFuncs.appendErrorLogAndAppNotification(err.retMessage, window)
-          window.webContents.send('msgReceivedSQL', err.retMessage)
-          // window.webContents.send('msgReceivedError', err.retMessage)
+          // window.webContents.send('msgReceivedSQL', err.retMessage)
+          window.webContents.send('msgReceivedError', err.retMessage)
+        })
+    })
+
+    // Manage SQL queries against Data DB
+    ipcMain.on('msgRequestSQLDataPara', (event, sqlInsertObj: DBQueryInObject, referenceString: string) => {
+      sqlInsertObj.sInDBName = EnumDbNames.Data
+      sqlInsertObj.sInQueryType = EnumDbDMLTypes.Select
+      // sqlInsertObj.sInQuerySql = sqlStatement
+
+      SqlFuncs.getData(sqlInsertObj)
+        .then((rows) => {
+          window.webContents.send('msgReceivedSQL', rows.retObject, referenceString)
+        })
+        .catch((err) => {
+          GeneralFuncs.appendErrorLogAndAppNotification(err.retMessage, window)
+          // window.webContents.send('msgReceivedSQL', err.retMessage)
+          window.webContents.send('msgReceivedError', err.retMessage, referenceString)
+        })
+    })
+
+    // Manage insert statements against Data DB when a DBQueryInObject is delivered
+    ipcMain.on('msgDeleteSQLDataPara', (event, sqlInsertObj: DBQueryInObject) => {
+      sqlInsertObj.sInDBName = EnumDbNames.Data
+      sqlInsertObj.sInQueryType = EnumDbDMLTypes.Delete
+      let retIPCEvent : string = 'msgReceivedDelete'
+      if (sqlInsertObj.sInIPCResponse !== undefined) {
+        retIPCEvent = sqlInsertObj.sInIPCResponse
+      }
+      // let retIPCEventError : string = 'msgReceivedDeleteError'
+      let retIPCEventError : string = 'msgReceiveGeneralError'
+      if (sqlInsertObj.sInIPCResponseError !== undefined) {
+        retIPCEventError = sqlInsertObj.sInIPCResponseError
+      }
+
+      SqlFuncs.executeSQL(sqlInsertObj)
+        .then((rows) => {
+          window.webContents.send(retIPCEvent, rows.retObject)
+        })
+        .catch((err) => {
+          GeneralFuncs.appendErrorLogAndAppNotification(err.retErrorMessage)
+          window.webContents.send(retIPCEventError, err /* .retMessage */)
+        })
+    })
+
+    // Manage insert statements against Data DB when a DBQueryInObject is delivered
+    ipcMain.on('msgInsertSQLDataPara', (event, sqlInsertObj: DBQueryInObject, referenceString: string) => {
+      sqlInsertObj.sInDBName = EnumDbNames.Data
+      sqlInsertObj.sInQueryType = EnumDbDMLTypes.Insert
+      let retIPCEvent : string = 'msgReceivedInsert'
+      if (sqlInsertObj.sInIPCResponse !== undefined) {
+        retIPCEvent = sqlInsertObj.sInIPCResponse
+      }
+      // let retIPCEventError : string = 'msgReceivedInsertError'
+      let retIPCEventError : string = 'msgReceiveGeneralError'
+      if (sqlInsertObj.sInIPCResponseError !== undefined) {
+        retIPCEventError = sqlInsertObj.sInIPCResponseError
+      }
+
+      SqlFuncs.executeSQL(sqlInsertObj)
+        .then((rows) => {
+          window.webContents.send(retIPCEvent, rows.retObject, referenceString)
+        })
+        .catch((err) => {
+          GeneralFuncs.appendErrorLogAndAppNotification(err.retErrorMessage + " " + sqlInsertObj.aInParameter + " " + sqlInsertObj.sInQuerySql)
+          window.webContents.send(retIPCEventError, err /* .retMessage */, referenceString)
+        })
+    })
+
+    // Manage insert statements against Data DB
+    ipcMain.on('msgInsertSQLData', (event, SqlInsertStmt: string) => {
+      const Para1 = new DBQueryInObject()
+      Para1.sInDBName = EnumDbNames.Data
+      Para1.sInQueryType = EnumDbDMLTypes.Insert
+      Para1.sInQuerySql = SqlInsertStmt
+
+      SqlFuncs.executeSQL(Para1)
+        .then((rows) => {
+          window.webContents.send('msgReceivedInsert', rows.retObject)
+        })
+        .catch((err) => {
+          GeneralFuncs.appendErrorLogAndAppNotification(err.retMessage)
+          window.webContents.send('msgReceivedInsert', err.retMessage)
         })
     })
 

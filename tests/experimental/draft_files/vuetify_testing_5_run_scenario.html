@@ -1,21 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-  <link
-    href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
-    rel="stylesheet"
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
+      rel="stylesheet"
     />
-  <link
-    href="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.css"
-    rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-</head>
+  </head>
   <body>
     <div id="app"></div>
-      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.js"></script>
-      <script type="text/x-template" id="app-template">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.js"></script>
+    <script type="text/x-template" id="app-template">
       <v-app>
         <v-layout class="rounded rounded-md">
           <v-navigation-drawer
@@ -33,9 +30,9 @@
               <v-list-item prepend-icon="mdi-handshake" title="Culture Hints" value="CultureHints" @click.stop="testMethod"></v-list-item>
             </v-list>
           </v-navigation-drawer>
-      
+
           <!--v-app-bar title="Application bar"></v-app-bar-->
-      
+
           <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
             <!--Main Content-->
             <v-container class="white">
@@ -55,7 +52,7 @@
                       <v-col align-self="end" cols="6">
                         <v-sheet class="pa-2 ma-2" :elevation="4" :height="672" :width="300" border color="bg-surface-variant" rounded>
                         </v-sheet>
-                      </v-col>  
+                      </v-col>
                 </v-row>
                 </v-container>
           </v-main>
@@ -64,12 +61,12 @@
     </script>
     <script>
       // Vue Section
-      const { createApp } = Vue;
-      const { createVuetify } = Vuetify;
+      const { createApp } = Vue
+      const { createVuetify } = Vuetify
 
-      const vuetify = createVuetify();
+      const vuetify = createVuetify()
       const app = createApp({
-        template: "#app-template", 
+        template: '#app-template',
         data() {
           return {
             v_rail: false
@@ -85,9 +82,9 @@
         },*/
         methods: {
           testMethod() {
-            console.log('Dies ist ein Test');
+            console.log('Dies ist ein Test')
             this.v_rail = !this.v_rail
-          }/*,
+          } /*,
           boop() {
             console.log('booop');
             console.log('test', this.test);
@@ -95,7 +92,7 @@
         }
       })
         .use(vuetify)
-        .mount("#app");
+        .mount('#app')
     </script>
   </body>
 </html>

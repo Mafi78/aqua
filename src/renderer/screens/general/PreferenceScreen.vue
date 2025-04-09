@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { onMounted, ref, version } from 'vue'
 import { useRouter } from 'vue-router'
 

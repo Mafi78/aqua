@@ -1,6 +1,8 @@
-import { app, BrowserWindow, RenderProcessGoneDetails } from 'electron'
+import { app, BrowserWindow,
+  RenderProcessGoneDetails /*, nativeImage */ } from 'electron'
 import Constants from './utils/Constants'
 import IPCs from './IPCs'
+// import icpHandlers from './ipc-handlers';
 import {
   DBQueryInObject,
   DBValueOutObject,
@@ -25,10 +27,12 @@ const exitApp = (mainWindow: BrowserWindow): void => {
     Constants.dbDataObject.close()
   }
   GeneralFuncs.appendErrorLog('Application stopped')
-  Constants.logErrorObject.end()
 
   // save settings in preference file
-  GeneralFuncs.savePreferenceFile('')
+  /* GeneralFuncs.savePreferenceFile('')
+
+  // this cannot be done here - it has to be done in the savePReferenceFile function
+  // Constants.logErrorObject.end()
 
   if (mainWindow && !mainWindow.isDestroyed()) {
     mainWindow.hide()
@@ -36,17 +40,21 @@ const exitApp = (mainWindow: BrowserWindow): void => {
   mainWindow.destroy()
 
   app.exit()
+  */
+  GeneralFuncs.savePreferenceFileAndQuit('', mainWindow)
 }
 
 export const createMainWindow = async (mainWindow: BrowserWindow): Promise<BrowserWindow> => {
+  // const icon = require('../renderer/public/images/logo-64.png');
   // instantiate the Main Window
   mainWindow = new BrowserWindow({
     title: Constants.APP_NAME,
+    // icon: nativeImage.createFromDataURL(icon.default),
     show: false,
     width: Constants.IS_DEV_ENV ? 1500 : 1200,
     height: 650,
     useContentSize: true,
-    webPreferences: Constants.DEFAULT_WEB_PREFERENCES
+    webPreferences: Constants.DEFAULT_WEB_PREFERENCES,
   })
 
   // take care of the menu
@@ -139,6 +147,8 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
   }
 
   // Initialize IPC Communication
+  // icpHandlers();
+  // icpHandlers.IPC_Mains(mainWindow)
   IPCs.initialize(mainWindow)
 
   // Here the application variables are defined
@@ -196,7 +206,7 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
       defChanged = GeneralFuncs.checkPrefFileChangedUpdates(defPrefTry, defPref) // false
     } catch (error) {
       // Put Error to Log
-      GeneralFuncs.appendErrorLogAndAppNotification(error.retMessage, mainWindow)
+      GeneralFuncs.appendErrorLogAndAppNotification(error.message, mainWindow)
     }
 
     // if there is any change made - then rewrite the save file
@@ -357,8 +367,18 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
   let withOrWithoutErrors = ''
   if (Constants.ErrorsOccurredInApp.length === 0) {
     withOrWithoutErrors = ' without errors.'
+    mainWindow.webContents.send(
+      'msgReceivedLogEntries', /*
+      Constants.tempSettings.appWidth, */
+      "Main Runner erfolgreich gelaufen - without errors"
+    )
   } else {
     withOrWithoutErrors = ' with errors: ' + Constants.ErrorsOccurredInApp
+    mainWindow.webContents.send(
+      'msgReceivedError', /*
+      Constants.tempSettings.appWidth, */
+      "Main Runner erfolgreich gelaufen - with errors: " + Constants.ErrorsOccurredInApp
+    )
   }
   console.log('MainRunner.createMainWindow finished ' + withOrWithoutErrors, resPrefDB)
 

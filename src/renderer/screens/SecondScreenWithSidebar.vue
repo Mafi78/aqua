@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { BasicApp } from '@/renderer/components/layout'
 import SecondScreen from '@/renderer/screens/SecondScreen.vue'
 </script>

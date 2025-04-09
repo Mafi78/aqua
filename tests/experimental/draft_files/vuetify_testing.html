@@ -1,62 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-  <link
-    href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
-    rel="stylesheet"
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
+      rel="stylesheet"
     />
-  <link
-    href="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.css"
-    rel="stylesheet"
-    />
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.css" rel="stylesheet" />
+  </head>
   <body>
     <div id="app"></div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@3.0.5/dist/vuetify.min.js"></script>
     <script type="text/x-template" id="app-template">
-      <v-app>
-        <v-card
-          class="mx-auto"
-          width="400"
-          append-icon="mdi-human-greeting"
+         <v-app>
+           <v-card
+             class="mx-auto"
+             width="400"
+             append-icon="mdi-human-greeting"
+           >
+             <template v-slot:title>
+               Title
+             </template>
+             <v-card-text>
+               Description
+             </v-card-text>
+           </v-card>
+           <v-card>
+      <v-layout>
+        <v-navigation-drawer
+      	image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+      	theme="dark"
+      	permanent
         >
-          <template v-slot:title>
-            Title
-          </template>
-          <v-card-text>
-            Description
-          </v-card-text>
-        </v-card>
-        <v-card>
-			<v-layout>
-			  <v-navigation-drawer
-				image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-				theme="dark"
-				permanent
-			  >
-				<v-list nav>
-				  <v-list-item prepend-icon="mdi-email" title="Inbox" value="inbox"></v-list-item>
-				  <v-list-item prepend-icon="mdi-account-supervisor-circle" title="Supervisors" value="supervisors"></v-list-item>
-				  <v-list-item prepend-icon="mdi-clock-start" title="Clock-in" value="clockin"></v-list-item>
-				</v-list>
-			  </v-navigation-drawer>
-			  <v-main style="height: 250px"></v-main>
-			</v-layout>
-		  </v-card>
-      </v-app>
+      	<v-list nav>
+      	  <v-list-item prepend-icon="mdi-email" title="Inbox" value="inbox"></v-list-item>
+      	  <v-list-item prepend-icon="mdi-account-supervisor-circle" title="Supervisors" value="supervisors"></v-list-item>
+      	  <v-list-item prepend-icon="mdi-clock-start" title="Clock-in" value="clockin"></v-list-item>
+      	</v-list>
+        </v-navigation-drawer>
+        <v-main style="height: 250px"></v-main>
+      </v-layout>
+       </v-card>
+         </v-app>
     </script>
     <script>
-      const { createApp } = Vue;
-      const { createVuetify } = Vuetify;
-      
-      const vuetify = createVuetify();
-      
+      const { createApp } = Vue
+      const { createVuetify } = Vuetify
+
+      const vuetify = createVuetify()
+
       const app = createApp({
-        template: "#app-template", 
+        template: '#app-template'
       })
         .use(vuetify)
-        .mount("#app");
+        .mount('#app')
     </script>
   </body>
 </html>

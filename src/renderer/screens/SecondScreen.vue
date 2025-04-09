@@ -1,15 +1,13 @@
 <template>
   <v-container class="my-5">
     <!-- Upper Third - "Hello" Text -->
-  <div class="d-flex justify-center">
-    <v-card width="300px">
-      <v-card-title class="text-h6 text-md-h5 text-lg-h4">Hello</v-card-title>
-      <v-card-text>
-        What would you like to do today?
-      </v-card-text>
-    </v-card>
-  </div>
-   
+    <div class="d-flex justify-center">
+      <v-card width="300px">
+        <v-card-title class="text-h6 text-md-h5 text-lg-h4">Hello</v-card-title>
+        <v-card-text> What would you like to do today? </v-card-text>
+      </v-card>
+    </div>
+
     <!-- Lower Third - Three Square Buttons -->
     <v-row justify="center" align="end">
       <v-col cols="4" md="4">
@@ -47,11 +45,11 @@
           </v-col>
         </v-row -->
         <v-card
-      subtitle="This is a subtitle"
-      text="This is content"
-      title="This is a title"
-      width="400"
-    ></v-card>
+          subtitle="This is a subtitle"
+          text="This is content"
+          title="This is a title"
+          width="400"
+        ></v-card>
       </v-col>
       <v-col cols="2"></v-col>
     </v-row>
@@ -59,5 +57,5 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>

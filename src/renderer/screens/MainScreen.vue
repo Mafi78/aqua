@@ -1,25 +1,20 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { useTheme } from 'vuetify'
 import { openExternal } from '@/renderer/utils'
 import { useCounterStore } from '@/renderer/store/counter'
+import { useLogStore } from '@/renderer/store/logStore'
+
 import { storeToRefs } from 'pinia'
 import { onMounted, ref } from 'vue'
-// import ManiSecure from 'ManiSecure'
 import ThirdScreen from '@/renderer/screens/ThirdScreen.vue'
-// import {
-/* DBQueryInObject, EnumDbNames, EnumDbDMLTypes */ /* SQLBaseModule */
-// } from '@/main/utils/SqlBaseModule'
-// import {  /* DBQueryInObject, EnumDbNames, EnumDbDMLTypes */ SQLBaseModule
-// } from './../../main/utils/SqlBaseModule'
-// import DBValueOutObject from '@/main/utils/SqlBaseModule'
-
 import { useRouter } from 'vue-router'
 
 const { locale, availableLocales } = useI18n()
 
 const { counterIncrease } = useCounterStore()
 const { counter } = storeToRefs(useCounterStore())
+const logStore = useLogStore();
 
 const theme = useTheme()
 const languages = ref(['en'])
@@ -53,7 +48,7 @@ onMounted((): void => {
   window.mainApi.receive('msgReceivedSQL', (event: Event, sqlRes: /* DBValueOutObject */ any) => {
     sqlResult.value = sqlRes
 
-    // console.log(sqlRes);
+    console.log(sqlRes)
     /*
     if (sqlRes.retStatus === 0 /* EnumRetStatus.OK * /) {
       sqlResult.value = sqlRes.retArray.toString()
@@ -101,6 +96,23 @@ const handleSQL = async (): Promise<void> => {
   window.mainApi.send('msgRequestSQLData', 'SELECT * FROM ' + firstname.value)
 }
 
+// Delete a log
+const deleteLog = async (errorId: number) : Promise<void> => {
+  // logStore.deleteLog(errorId);
+  logStore.clearLog();
+};
+
+// Fill the log
+const fillLog = async (msg: string) : Promise<void> => {
+  // logStore.deleteLog(errorId);
+  logStore.addLogInfoText('Log-' + Date.now());
+};
+
+const fillError = async (msg: string) : Promise<void> => {
+  // logStore.deleteLog(errorId);
+  logStore.addLogErrorText('Error-' + Date.now());
+};
+
 const handleConstants = async (): Promise<void> => {
   console.log('handleConstants soll aufgerufen werden')
   window.mainApi.send('msgRequestConstant')
@@ -128,34 +140,43 @@ const handleCountIncrease = (): void => {
     </v-row>
     <v-row class="my-4">
       <v-col cols="12" md="7">
-        <h2 class="my-4">{{ $t('desc.welcome-title') }}</h2>
+        <h2 class="my-4">{{ $t('desc.welcome-title') }} Mani</h2>
         <p>{{ $t('desc.welcome-desc') }}</p>
-        <p class="my-4"
-          >App Version: 4711 <strong>{{ appVersion }}</strong></p
-        >
+        <v-divider/>
+        App Version: 4711 <strong>{{ appVersion }}</strong>
         Nimm das {{ routStr }}
-        <v-row class="my-4">
-          <v-col cols="4">
+        <v-divider/>
+        <v-row class="my-2">
+          <v-col cols="2">
             <v-btn icon color="primary" @click="handleConstants">
               {{ $t('menu.constants') }}
               <v-tooltip activator="parent" location="bottom">
                 {{ $t('menu.constants') }}
               </v-tooltip>
             </v-btn>
-            <p class="my-4">
+            <p class="my-2">
               Constant-Result: <strong>{{ constantResult }}</strong>
             </p>
           </v-col>
-          <v-col cols="4">
+          <v-col cols="6">
             <v-btn icon color="primary" @click="handleSQL">
               {{ $t('menu.sql') }}
               <v-tooltip activator="parent" location="bottom">
-                {{ $t('menu.sql') }}
+                {{ $t('menu.sql') }} -> Tabelle {{ firstname }}
               </v-tooltip>
             </v-btn>
-            <p class="my-4">
+            <p class="my-2">
               SQL-Result: <strong>{{ sqlResult }}</strong>
             </p>
+          </v-col>
+          <v-col cols="1">
+            <v-btn @click="deleteLog">Clear the Logs</v-btn>
+          </v-col>
+          <v-col cols="1">
+            <v-btn @click="fillLog">Fill Logs</v-btn>
+          </v-col>
+          <v-col cols="1">
+            <v-btn @click="fillError">Fill Error</v-btn>
           </v-col>
         </v-row>
         <v-row class="my-4">
@@ -242,17 +263,6 @@ const handleCountIncrease = (): void => {
               {{ $t('menu.change-language') }}
             </v-select>
           </v-col>
-          <!-- v-col cols="6">
-            <v-btn icon color="primary" @click="handleSQL">
-              SQL
-              <v-tooltip activator="parent" location="bottom">
-                {{ $t('menu.sql') }}
-              </v-tooltip>
-            </v-btn>
-            <p class="my-4">
-              SQL-Result: <strong>{{ sqlResult }}</strong>
-            </p>
-          </v-col -->
         </v-row>
       </v-col>
     </v-row>

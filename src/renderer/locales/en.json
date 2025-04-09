@@ -33,5 +33,69 @@
     "github": "Quellcode",
     "sql": "SQL",
     "hello": "Hi my friends"
+  },
+  "formelements": {
+    "buttons": {
+      "save": "Save"
+    }
+  },
+  "WorkOnDB": {
+    "Title": {
+      "Index": "Index",
+      "Name": "Name",
+      "Description": "Description",
+      "Action": "Action"
+    },
+    "Button": {
+      "Add": "Add",
+      "Edit": "Edit - Opens Details",
+      "Delete": "Delete",
+      "Update": "Update",
+      "Save": "Save",
+      "Cancel": "Cancel"
+    },
+    "Tooltip": {
+      "AddEntry": "Add new DB",
+      "CopyDB": "Copy DB"
+    },
+    "Dialog": {
+      "TitleInsert": "Insert DB",
+      "TitleEdit": "Edit DB"
+    }
+  },
+  "WorkOnDBDetails": {
+    "Title": {
+      "Entity": "Entity # and Name",
+      "EntitySingle": "Entity",
+      "Edit": "Edit",
+      "Action": "Action",
+      "CloseDBDetail": "Close DB Details",
+      "CharacteristicValues": "Characteristic values",
+      "KZ1_SU": "Shared Understanding",
+      "KZ2_PF": "Performance Feedback",
+      "KZ3_IN": "Influence Narrative",
+      "KZ4_LS": "Leadership Style",
+      "KZ5_DA": "Decisisonmaking Approach",
+      "KZ6_RF": "Relationship Foundation",
+      "KZ7_CR": "Conflict Resolution",
+      "KZ8_TM": "Time Management"
+    },
+    "Button": {
+      "Add": "Add",
+      "AddNew": "Add new Entity",
+      "Edit": "Edit - Opens Details",
+      "Delete": "Delete",
+      "Update": "Update",
+      "Save": "Save",
+      "Cancel": "Cancel"
+    },
+    "Tooltip": {
+      "AddEntry": "Add new DB",
+      "CopyDB": "Copy DB"
+    },
+    "Dialog": {
+      "TitleInsert": "Insert Entity",
+      "TitleEdit": "Edit Entity"
+    }
   }
 }

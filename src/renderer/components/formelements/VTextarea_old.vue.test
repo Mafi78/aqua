@@ -1,0 +1,63 @@
+<template>
+    <v-textarea
+      v-model="modelValue"
+      :label="label"
+      :placeholder="placeholder"
+      :rows="rows"
+      :auto-grow="autoGrow"
+      :clearable="clearable"
+      :counter="counter"
+      :variant="variant"
+      :density="density"
+      @update:model-value="updateValue"
+    />
+  </template>
+
+<script setup lang="ts">
+    // import { defineProps, defineEmits } from 'vue'
+
+    const {
+      modelValue = '',
+      label = 'Enter text',
+      placeholder = 'Type something...',
+      rows = 3,
+      autoGrow = true,
+      clearable = false,
+      counter = false,
+      variant = 'outlined',
+      density = 'comfortable',
+    } = defineProps<{
+      modelValue?: string;
+      label?: string;
+      placeholder?: String;
+      rows?: Number;
+      autoGrow?: Boolean;
+      clearable?: Boolean;
+      counter?: Boolean | Number;
+      variant?: String;
+      density?: String;
+    }>();
+    /*
+    defineProps({
+      modelValue: { type: String, default: '' },
+      label: { type: String, default: 'Enter text' },
+      placeholder: { type: String, default: 'Type something...' },
+      rows: { type: Number, default: 3 },
+      autoGrow: { type: Boolean, default: true },
+      clearable: { type: Boolean, default: false },
+      counter: { type: [Boolean, Number], default: false },
+      variant: { type: String, default: 'outlined' },
+      density: { type: String, default: 'comfortable' },
+    })
+    */
+
+    const emit = defineEmits(['update:modelValue'])
+
+    const updateValue = (value: string) => {
+      emit('update:modelValue', value)
+    }
+
+</script>
+
+<style scoped>
+</style>

@@ -13,6 +13,7 @@
     "runscenario": "Ein Szenario ausführen",
     "prepareonthego": "Prepare on-the-go",
     "workondb": "an einer Datenbank arbeiten",
+    "workondbdetail": "an einer Datenbank arbeiten",
     "accessdocu": "Access Documentation",
     "culturehints": "Culture Hints"
   },
@@ -33,5 +34,69 @@
     "github": "Quellcode",
     "sql": "SQL",
     "hello": "Hallo"
+  },
+  "formelements": {
+    "buttons": {
+      "save": "Speichern"
+    }
+  },
+  "WorkOnDB": {
+    "Title": {
+      "Index": "Index",
+      "Name": "Name",
+      "Description": "Beschreibung",
+      "Action": "Aktion"
+    },
+    "Button": {
+      "Add": "Hinzufügen",
+      "Edit": "Bearbeiten - öffnet Details",
+      "Delete": "Löschen",
+      "Update": "Aktualisieren",
+      "Save": "Speichern",
+      "Cancel": "Abbrechen"
+    },
+    "Tooltip": {
+      "AddEntry": "Eintrag hinzufügen",
+      "CopyDB": "Datenbank kopieren"
+    },
+    "Dialog": {
+      "TitleInsert": "DB einfügen",
+      "TitleEdit": "DB ändern"
+    }
+  },
+  "WorkOnDBDetails": {
+    "Title": {
+      "Entity": "Entitäts # und Name",
+      "EntitySingle": "Entität",
+      "Edit": "Editieren",
+      "Action": "Aktion",
+      "CloseDBDetail": "DB-Detail schließen",
+      "CharacteristicValues": "Characteristic-Werte",
+      "KZ1_SU": "Shared Understanding",
+      "KZ2_PF": "Performance Feedback",
+      "KZ3_IN": "Influence Narrative",
+      "KZ4_LS": "Leadership Style",
+      "KZ5_DA": "Decisisonmaking Approach",
+      "KZ6_RF": "Relationship Foundation",
+      "KZ7_CR": "Conflict Resolution",
+      "KZ8_TM": "Time Management"
+    },
+    "Button": {
+      "Add": "Hinzufügen",
+      "AddNew": "Entität hinzufügen",
+      "Edit": "Bearbeiten - öffnet Details",
+      "Delete": "Löschen",
+      "Update": "Aktualisieren",
+      "Save": "Speichern",
+      "Cancel": "Abbrechen"
+    },
+    "Tooltip": {
+      "AddEntry": "Eintrag hinzufügen",
+      "CopyDB": "Datenbank kopieren"
+    },
+    "Dialog": {
+      "TitleInsert": "Entität einfügen",
+      "TitleEdit": "Entität ändern"
+    }
   }
 }

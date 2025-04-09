@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import HeaderLayout from '@/renderer/components/layout/HeaderLayout.vue'
 import { useRouter } from 'vue-router'
 import { ref, computed } from 'vue'

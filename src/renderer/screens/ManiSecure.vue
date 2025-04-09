@@ -19,7 +19,7 @@
   </span>
 </template>
 
-<script setup lang="tsx">
+<script setup lang="ts">
 import { onMounted /*, watch */ } from 'vue'
 
 // const name = "SecureMani";

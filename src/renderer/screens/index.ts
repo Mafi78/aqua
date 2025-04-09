@@ -9,11 +9,13 @@ import PreferenceScreenWithSidebar from '@/renderer/screens/general/PreferenceSc
 import TestScreen from '@/renderer/screens/TestScreen.vue'
 import TestScreenWithSidebar from '@/renderer/screens/TestScreenWithSidebar.vue'
 import ScreenAccessScenario from '@/renderer/screens/ScreenAccessScenario.vue'
-import ScreenRunScenario from '@/renderer/screens/ScreenRunScenario.vue'
+import ScreenRunScenario from '@/renderer/screens/RunScenario/ScreenRunScenario.vue'
 import ScreenPrepareOnTheGo from '@/renderer/screens/ScreenPrepareOnTheGo.vue'
-import ScreenWorkOnDb from '@/renderer/screens/ScreenWorkOnDB.vue'
+import ScreenWorkOnDb from '@/renderer/screens/WorkOnDB/ScreenWorkOnDB.vue'
+import ScreenWorkOnDbDetail from '@/renderer/screens/WorkOnDB/ScreenWorkOnDBDetail.vue'
 import ScreenAccessDocu from '@/renderer/screens/ScreenAccessDocu.vue'
 import ScreenCultureHints from '@/renderer/screens/ScreenCultureHints.vue'
+import ScreenTest2 from '@/renderer/screens/Tests/Test2Screen.vue'
 
 export {
   ErrorScreen,
@@ -30,7 +32,8 @@ export {
   ScreenRunScenario,
   ScreenPrepareOnTheGo,
   ScreenWorkOnDb,
+  ScreenWorkOnDbDetail,
   ScreenAccessDocu,
-  ScreenCultureHints
-
+  ScreenCultureHints,
+  ScreenTest2
 }

@@ -6,6 +6,11 @@ const mainAvailChannels: string[] = [
   'msgRequestGetVersion',
   'msgOpenExternalLink',
   'msgRequestSQLData',
+  'msgRequestSQLDataPara',
+  'msgInsertSQLData',
+  'msgInsertSQLDataPara',
+  'msgDeleteSQLData',
+  'msgDeleteSQLDataPara',
   'msgRequestSQLPref',
   'msgRequestConstant',
   'msgRequestCleanErrors'
@@ -13,9 +18,14 @@ const mainAvailChannels: string[] = [
 const rendererAvailChannels: string[] = [
   'msgReceivedVersion',
   'msgReceivedSQL',
+  'msgReceivedInsert',
+  'msgReceivedDelete',
   'msgReceivedConstant',
   'msgReceivedError',
-  'msgReceivedAppSizeChanged'
+  'msgReceiveGeneralError',
+  'msgReceivedInsertError',
+  'msgReceivedAppSizeChanged',
+  'msgReceivedLogEntries'
 ]
 
 contextBridge.exposeInMainWorld('mainApi', {
@@ -37,6 +47,16 @@ contextBridge.exposeInMainWorld('mainApi', {
         `Receive failed: Unknown ipc channel name: ${channel}`
       ) */
       throw new Error(`Receive failed: Unknown ipc channel name: ${channel}`)
+    }
+  },
+  removeListener: (channel: string, cbFunc: Function): void => {
+    if (rendererAvailChannels.includes(channel)) {
+      ipcRenderer.removeListener(channel, (event, ...args) => cbFunc(event, ...args))
+    } else {
+      /* Constants.logErrorObject.appendErrorLogAndAppNotification(
+        `Receive failed: Unknown ipc channel name: ${channel}`
+      ) */
+      throw new Error(`RemoveListener failed: Unknown ipc channel name: ${channel}`)
     }
   },
   invoke: async (channel: string, ...data: any[]): Promise<any> => {

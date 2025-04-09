@@ -26,7 +26,7 @@ export default class Migrations {
         {
           db: 'Data',
           sql: 'CREATE TABLE Databases (             DABA_ID INTEGER PRIMARY KEY AUTOINCREMENT,            DABA_NAME TEXT NOT NULL,            DABA_DESCRIPTION TEXT,            DABA_VERSION TEXT,            DABA_CREATED_AT TEXT,            DABA_LAST_EDITED_AT TEXT,            DABA_LAST_EDITED_BY INTEGER,            DABA_INHERITED_FROM_ID INTEGER,            DABA_NOTES TEXT          )'
-        }/*,
+        } /*,
         {
           db: 'Data',
           sql: 'INSERT INTO TimeCustomer ( CUST_ID, CUST_NAME, CUST_DESC, CUST_CREATEDDATE) VALUES (0, "Please pick a Customer", "Picker-Entry", "1978-16-11")'
@@ -54,16 +54,15 @@ export default class Migrations {
         {
           db: 'Data',
           sql: 'CREATE TABLE Entities (            ENTI_ID INTEGER PRIMARY KEY AUTOINCREMENT,            ENTI_NAME TEXT,            ENTI_CATEGORY_ID INTEGER DEFAULT (0),            ENTI_LOCKED INTEGER DEFAULT (0),            ENTI_CREATED_AT TEXT,            ENTI_LAST_EDITED_AT TEXT,            ENTI_LAST_EDITED_BY TEXT,            ENTI_NOTES TEXT,            ENTI_DB_ID INTEGER,            ENTI_CHAR_ID INTEGER,            CONSTRAINT Entities_Entity_Category_FK FOREIGN KEY (ENTI_CATEGORY_ID) REFERENCES Entity_Category(ENCA_ID) ON DELETE SET DEFAULT ON UPDATE RESTRICT,            CONSTRAINT Entities_Databases_FK FOREIGN KEY (ENTI_DB_ID) REFERENCES Databases(DABA_ID) ON DELETE CASCADE ON UPDATE RESTRICT,            CONSTRAINT Entities_Characteristics_FK FOREIGN KEY (ENTI_CHAR_ID) REFERENCES Entity_Characteristics(ENCH_ID) ON DELETE CASCADE ON UPDATE RESTRICT          )'
-        }/*,
+        } /*,
         {
           db: 'Data',
           sql: 'INSERT INTO TimeProject ( PROJ_ID, PROJ_NAME, PROJ_DESC, PROJ_CREATEDDATE, PROJ_CUST_ID) VALUES (0, "Please pick a Project", "Picker-Entry", "1978-16-11", 0)'
         } */,
-
         {
           db: 'Data',
           sql: 'CREATE TABLE Scenario (            SCEN_ID INTEGER PRIMARY KEY AUTOINCREMENT,            SCEN_NAME TEXT,            SCEN_DB_ID INTEGER,            SCEN_ENTI_ID1 INTEGER,            SCEN_ENTI_ID2 INTEGER,            SCEN_CREATED_AT TEXT,            SCEN_LAST_EDITED_BY TEXT,            SCEN_LAST_EDITED_AT TEXT,            SCEN_NOTES TEXT,            CONSTRAINT Scenario_Databases_FK FOREIGN KEY (SCEN_DB_ID) REFERENCES Databases(DABA_ID) ON DELETE CASCADE ON UPDATE RESTRICT,            CONSTRAINT Scenario_Entities_FK FOREIGN KEY (SCEN_ENTI_ID1) REFERENCES Entities(ENTI_ID) ON DELETE SET NULL ON UPDATE RESTRICT,            CONSTRAINT Scenario_Entities_FK_1 FOREIGN KEY (SCEN_ENTI_ID2) REFERENCES Entities(ENTI_ID) ON DELETE SET NULL ON UPDATE RESTRICT          )'
-        }/*,
+        } /*,
         {
           db: 'Data',
           sql: 'INSERT INTO TimeActivity ( AKTI_ID, AKTI_NAME, AKTI_DESC, AKTI_CREATEDDATE, AKTI_SPRO_ID) VALUES (0, "Please pick a Activity", "Picker-Entry", "1978-16-11", 0)'
@@ -72,7 +71,6 @@ export default class Migrations {
     },
     always: {
       dbUp: [
-        /* Let's check if this is ncessary */
         {
           db: 'Data',
           sql: 'PRAGMA foreign_keys = ON'
@@ -84,9 +82,14 @@ export default class Migrations {
         {
           db: 'Pref',
           sql: 'INSERT OR IGNORE INTO ReleaseNotes (RELN_ID, RELN_DESC, RELN_NUM, RELN_DATE, RELN_DBUP_ID, RELN_INCLUDED) VALUES (2, "Second minor Release. Includes Basic functionality", "1.0.2", "2023-12-30", "100000002", 0)'
+        },
+        {
+          db: 'Pref',
+          sql: 'INSERT OR IGNORE INTO ReleaseNotes (RELN_ID, RELN_DESC, RELN_NUM, RELN_DATE, RELN_DBUP_ID, RELN_INCLUDED) VALUES (3, "Second minor Release. Includes Basic functionality", "1.0.3", "2025-03-25", "100000003", 0)'
         }
       ]
     },
+    /* you have to set the property values in the always section as well to be able to get seen ! */
     '100000001': {
       dbUp: [
         { db: 'Pref', sql: 'UPDATE SETTINGS SET SETT_VALUE = "1.0.1" WHERE SETT_ID = 5' },
@@ -111,6 +114,39 @@ export default class Migrations {
           db: 'Pref',
           sql: 'UPDATE ReleaseNotes set RELN_INCLUDED = 1 where RELN_DBUP_ID = "100000002"'
         }
+      ]
+    },
+    '100000003': {
+      dbUp: [
+        { db: 'Pref', sql: 'UPDATE SETTINGS SET SETT_VALUE = "1.0.3" WHERE SETT_ID = 5' },
+        {
+          db: 'Data',
+          sql: 'PRAGMA foreign_keys = OFF'
+        },
+        {
+          db: 'Data',
+          sql: 'CREATE TABLE Entity_Characteristics_New ( ENCH_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ENCH_ENTI_ID INTEGER, ENCH_NOTES TEXT, ENCH_SHARED_UNDERSTANDING REAL NOT NULL, ENCH_PERFORMANCE_FEEDBACK REAL NOT NULL, ENCH_INFLUENCE_NARRATIVE REAL NOT NULL, ENCH_LEADERSHIP_STYLE REAL NOT NULL, ENCH_DECISIONMAKING_APPROACH REAL NOT NULL, ENCH_RELATIONSHIP_FOUNDATION REAL NOT NULL, ENCH_CONFLICT_RESOLUTION REAL NOT NULL, ENCH_TIME_MANAGEMENT REAL NOT NULL, ENCH_CREATED_AT TEXT, ENCH_LAST_EDITED_AT TEXT, ENCH_LAST_EDITED_BY TEXT, CONSTRAINT Characteristics_EntitiesFK FOREIGN KEY (ENCH_ENTI_ID) REFERENCES Entities(ENTI_ID) ON DELETE CASCADE ON UPDATE RESTRICT)'
+        },
+        {
+          db: 'Data',
+          sql: 'INSERT INTO Entity_Characteristics_New (ENCH_ID, ENCH_ENTI_ID, ENCH_NOTES, ENCH_SHARED_UNDERSTANDING, ENCH_PERFORMANCE_FEEDBACK, ENCH_INFLUENCE_NARRATIVE, ENCH_LEADERSHIP_STYLE, ENCH_DECISIONMAKING_APPROACH, ENCH_RELATIONSHIP_FOUNDATION, ENCH_CONFLICT_RESOLUTION, ENCH_TIME_MANAGEMENT, ENCH_CREATED_AT, ENCH_LAST_EDITED_AT, ENCH_LAST_EDITED_BY) SELECT ENCH_ID, NULL, ENCH_NOTES, ENCH_SHARED_UNDERSTANDING, ENCH_PERFORMANCE_FEEDBACK, ENCH_INFLUENCE_NARRATIVE, ENCH_LEADERSHIP_STYLE, NCH_DECISIONMAKING_APPROACH, ENCH_RELATIONSHIP_FOUNDATION, ENCH_CONFLICT_RESOLUTION, ENCH_TIME_MANAGEMENT, ENCH_CREATED_AT, ENCH_LAST_EDITED_AT, ENCH_LAST_EDITED_BY FROM Entity_Characteristics'
+        },
+        {
+          db: 'Data',
+          sql: 'drop table Entity_Characteristics'
+        },
+        {
+          db: 'Data',
+          sql: 'ALTER TABLE Entity_Characteristics_New RENAME TO Entity_Characteristics'
+        },
+        {
+          db: 'Data',
+          sql: 'PRAGMA foreign_keys = ON'
+        },
+        {
+          db: 'Pref',
+          sql: 'UPDATE ReleaseNotes set RELN_INCLUDED = 1 where RELN_DBUP_ID = "100000003"'
+        },
       ]
     }
   }

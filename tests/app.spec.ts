@@ -48,7 +48,7 @@ test('Counter button click check', async () => {
   const counterValueElement = await appWindow.$('#counter-badge .v-badge__badge')
 
   expect(
-    await appWindow.evaluate((element) => element.innerHTML, counterValueElement),
+    await appWindow.evaluate((element) => element?.innerHTML, counterValueElement),
     'Confirm counter value is same'
   ).toBe('10')
 })
