@@ -303,7 +303,12 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
         GeneralFuncs.appendErrorLogAndAppNotification(resPrefDB.retMessage)
       }
     }
-  } catch (error) {}
+  } catch (error) {GeneralFuncs.appendErrorLogAndAppNotification('Database initialization error: ' + error);}
+
+  console.log('Preference DB path:'+ Constants.dbPrefSettings.pathAndFilename);
+  console.log('Data DB path:'+ Constants.dbDataSettings.pathAndFilename);
+  GeneralFuncs.appendErrorLogAndAppNotification('Preference DB path:'+ Constants.dbPrefSettings.pathAndFilename)
+  GeneralFuncs.appendErrorLogAndAppNotification('Data DB path:'+ Constants.dbDataSettings.pathAndFilename)
 
   // only do this when both DBs are available
   // if (checkFileExistsSync(Constants.dbPrefSettings.pathAndFilename) && checkFileExistsSync(Constants.dbDataSettings.pathAndFilename)) {

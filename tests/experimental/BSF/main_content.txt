@@ -1,0 +1,5 @@
+# Power Distance
+## Origin of the term power distance
+First used in the 1960s by Dutch experimental social psychologist Mauk Mulder for describing interpersonal power differences. In the 1970s, applied by Hofstede to differences between national societies 
+## Power Distance as a societal culture dimension
+Extent to which the less powerful members of institutions and organizations expect and accept that power is distributed unequally. The dimension is transferred to children by parents and other elders. In general, we speak of ###small and ###large power distances.
