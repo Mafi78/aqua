@@ -154,11 +154,12 @@ const removeLogItem = async (logId : number): Promise<void> => {
       </v-main>
 
       <!-- Insert Dialog start here -->
-      <v-dialog v-model="showErrorsDialog" max-width="500px">
+      <!-- max-width="500px" -->
+      <v-dialog v-model="showErrorsDialog" >
         <v-card>
           <!-- Header -->
           <v-card-title class="d-flex justify-space-between align-center">
-            <span>Dialog Title</span>
+            <span>Errors</span>
             <v-btn icon="mdi-close" variant="text" @click="showErrorsDialog = false"></v-btn>
           </v-card-title>
 
@@ -168,10 +169,13 @@ const removeLogItem = async (logId : number): Promise<void> => {
               <v-list-item
                 v-for="(logItem, index) in logObjectsError" :key="index"
                 :value="index">
-                <input v-model="logItem.errorId" placeholder="ID" />
-                <input v-model="logItem.errorText" placeholder="Text" />
-                <input v-model="logItem.errorType" placeholder="Type" />
-                <v-btn @click="removeLogItem(logItem.errorId)">Remove</v-btn>
+                <input v-model="logItem.errorId" placeholder="ID" style="width:30px"/>
+                <input v-model="logItem.errorText" placeholder="Text" style="width:90%"/>
+                <!-- input v-model="logItem.errorType" placeholder="Type" /-->
+                <v-btn
+                  style="width:50px"
+                  @click="removeLogItem(logItem.errorId)"
+                >Remove</v-btn>
               </v-list-item>
             </v-list>
           </v-card-text>

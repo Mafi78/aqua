@@ -471,7 +471,7 @@ const btnClickSendInsertEditDataEntity = () => {
   const paraIn = new DBQueryInObject()
   if (showDialogEntitiesInsertOrEdit.value === 'Insert') {
     // insert a new entity
-    paraIn.aInParameter = [entityName.value, "0" /* Category ID */, "Notestext", routeNaviObj.extraInfo.localKey, "1" /* Characteristic ID - will be replaced soon */]
+    paraIn.aInParameter = [entityName.value, "0" /* Category ID */, "Notestext", routeNaviObj.extraInfo.localKey]
     paraIn.sInQuerySql = EnumDBStatements.InsEntities
     paraIn.sInIPCResponse = 'msgReceivedInsert'
     paraIn.sInIPCResponseError = 'msgReceivedInsertError'

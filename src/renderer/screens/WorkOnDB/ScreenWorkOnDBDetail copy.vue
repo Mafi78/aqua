@@ -344,7 +344,7 @@
   const btnClickSendInsertDataEntity = () => {
     const paraIn = new DBQueryInObject()
     paraIn.sInQuerySql = EnumDBStatements.InsEntities
-    paraIn.aInParameter = [entitynName.value, "0" /* Category ID */ , "Notestext", routeNaviObj.extraInfo.localKey, "1" /* Characteristic ID - will be replaced soon */]
+    paraIn.aInParameter = [entitynName.value, "0" /* Category ID */ , "Notestext", routeNaviObj.extraInfo.localKey]
     paraIn.sInIPCResponse = 'msgReceivedInsert'
     paraIn.sInIPCResponseError = 'msgReceivedInsertError'
 

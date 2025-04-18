@@ -66,7 +66,7 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
   mainWindow.on('close', async (event: Event): Promise<void> => {
     event.preventDefault()
 
-    // TODO: Save the changed x, y and width and heigt values from Constantts.tempSettings to DB Pref
+    // DONE: Save the changed x, y and width and heigt values from Constantts.tempSettings to DB Pref
     if (Constants.dbPrefObject.open) {
       try {
         const _myReqPref = new DBQueryInObject()
@@ -206,7 +206,8 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
       defChanged = GeneralFuncs.checkPrefFileChangedUpdates(defPrefTry, defPref) // false
     } catch (error) {
       // Put Error to Log
-      GeneralFuncs.appendErrorLogAndAppNotification(error.message, mainWindow)
+      // GeneralFuncs.appendErrorLogAndAppNotification(error.message, mainWindow)
+      GeneralFuncs.appendErrorLog(error.message)
     }
 
     // if there is any change made - then rewrite the save file
@@ -215,7 +216,8 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
         writeFileSync(emsPrefFilename, JSON.stringify(defPref, null, 2), 'utf8')
       } catch (error) {
         // Put Error to Log
-        GeneralFuncs.appendErrorLogAndAppNotification(error.retMessage, mainWindow)
+        // GeneralFuncs.appendErrorLogAndAppNotification(error.retMessage, mainWindow)
+        GeneralFuncs.appendErrorLog(error.retMessage)
       }
     }
     if (Constants.ErrorsOccurredInApp.length === 0) {
@@ -246,12 +248,12 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
       mkdirSync(firstfolder)
       mkdirSync(defPref.generalDbPaths)
     } catch (error) {
-      GeneralFuncs.appendErrorLogAndAppNotification(
+      GeneralFuncs.appendErrorLog /* AndAppNotification */ (
         'Folder for Application-Databases: ' +
           defPref.generalDbPaths +
           ' could not be created automatically - ERROR: ' +
-          error,
-        mainWindow
+          error /*,
+        mainWindow */
       )
     }
   }
@@ -274,9 +276,9 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
   Constants.dbPrefObject = SqlFuncs.getDBObject(_mydbInit)
   // check if file exists
   if (!checkFileExistsSync(Constants.dbPrefSettings.pathAndFilename)) {
-    GeneralFuncs.appendErrorLogAndAppNotification(
-      'Folder for Preference DB: ' + Constants.dbPrefSettings.pathAndFilename + ' does not exist',
-      mainWindow
+    GeneralFuncs.appendErrorLog /* AndAppNotification */ (
+      'Folder for Preference DB: ' + Constants.dbPrefSettings.pathAndFilename + ' does not exist' /* ,
+      mainWindow */
     )
   }
 
@@ -284,31 +286,43 @@ export const createMainWindow = async (mainWindow: BrowserWindow): Promise<Brows
   _mydbDataInit.sInDBName = EnumDbNames.Data
   Constants.dbDataObject = SqlFuncs.getDBObject(_mydbDataInit)
   if (!checkFileExistsSync(Constants.dbDataSettings.pathAndFilename)) {
-    GeneralFuncs.appendErrorLogAndAppNotification(
-      'Folder for Data DB: ' + Constants.dbDataSettings.pathAndFilename + ' does not exist',
-      mainWindow
+    GeneralFuncs.appendErrorLog /* AndAppNotification */ (
+      'Folder for Data DB: ' + Constants.dbDataSettings.pathAndFilename + ' does not exist' /* ,
+      mainWindow */
     )
   }
 
-  try {
-    if (checkFileExistsSync(Constants.dbPrefSettings.pathAndFilename)) {
-      if (dbPrefDBFileExists) {
-        resPrefDB = await checkPrefDb()
-      } else {
-        await createPrefDb()
-        resPrefDB = await checkPrefDb()
-      }
-
-      if (resPrefDB.retStatus === EnumRetStatus.Error) {
-        GeneralFuncs.appendErrorLogAndAppNotification(resPrefDB.retMessage)
-      }
+  // Check if the Preference DB has to be created
+  GeneralFuncs.appendErrorLog( "Check FileExists (" + Constants.dbPrefSettings.pathAndFilename + ") = " + checkFileExistsSync(Constants.dbPrefSettings.pathAndFilename) )
+  GeneralFuncs.appendErrorLog( "Check dbPrefDBFileExists = " + dbPrefDBFileExists )
+  // if (checkFileExistsSync(Constants.dbPrefSettings.pathAndFilename)) {
+  if (!dbPrefDBFileExists) {
+    GeneralFuncs.appendErrorLog("Preference DB File does not exist ... it will be created here");
+    try {
+      await createPrefDb()
+    } catch (error) {
+      GeneralFuncs.appendErrorLog('Preference Database could not be generated: ' + error);
     }
-  } catch (error) {GeneralFuncs.appendErrorLogAndAppNotification('Database initialization error: ' + error);}
+  }
 
-  console.log('Preference DB path:'+ Constants.dbPrefSettings.pathAndFilename);
-  console.log('Data DB path:'+ Constants.dbDataSettings.pathAndFilename);
-  GeneralFuncs.appendErrorLogAndAppNotification('Preference DB path:'+ Constants.dbPrefSettings.pathAndFilename)
-  GeneralFuncs.appendErrorLogAndAppNotification('Data DB path:'+ Constants.dbDataSettings.pathAndFilename)
+  try {
+    GeneralFuncs.appendErrorLog("Preference DB File will be checked");
+    resPrefDB = await checkPrefDb()
+  } catch (error) {
+    GeneralFuncs.appendErrorLog("Preference DB should be created in exception");
+    await createPrefDb();
+    GeneralFuncs.appendErrorLogAndAppNotification('Database initialization error: ' + error);
+  }
+
+  if (resPrefDB.retStatus === EnumRetStatus.Error) {
+    GeneralFuncs.appendErrorLogAndAppNotification(resPrefDB.retMessage)
+  }
+  // }
+
+  // console.log('Preference DB path:'+ Constants.dbPrefSettings.pathAndFilename);
+  // console.log('Data DB path:'+ Constants.dbDataSettings.pathAndFilename);
+  GeneralFuncs.appendErrorLog('Preference DB path:'+ Constants.dbPrefSettings.pathAndFilename)
+  GeneralFuncs.appendErrorLog('Data DB path:'+ Constants.dbDataSettings.pathAndFilename)
 
   // only do this when both DBs are available
   // if (checkFileExistsSync(Constants.dbPrefSettings.pathAndFilename) && checkFileExistsSync(Constants.dbDataSettings.pathAndFilename)) {
@@ -436,9 +450,8 @@ async function implementReleaseNotes(resRelNotes: any) {
       _myReqPref.sInQuerySql = element.sql
       _myReqPref.sInDBName = element.db
 
+      GeneralFuncs.appendErrorLog('Implement Releasenotes - Entry in DB ' + element.db + ' Index (' + sqlArIndex + ') "' + element.sql + '"');
       await SqlFuncs.executeSQL(_myReqPref)
-      // const test = await SqlFuncs.executeSQL(_myReqPref);
-      // console.log(test);
     }
   }
 }
@@ -476,9 +489,8 @@ async function createPrefDb() {
     _myReqPref.sInQuerySql = element.sql
     _myReqPref.sInDBName = element.db
 
+    GeneralFuncs.appendErrorLog('Create Preference DB - Entry in DB ' + element.db + ' Index (' + sqlArIndex + ') "' + element.sql + '"');
     await SqlFuncs.executeSQL(_myReqPref)
-    // const test = await SqlFuncs.executeSQL(_myReqPref);
-    // console.log(test);
   }
 }
 
@@ -496,9 +508,8 @@ async function implementAlwaysBranch() {
     _myReqPref.sInQuerySql = element.sql
     _myReqPref.sInDBName = element.db
 
+    GeneralFuncs.appendErrorLog('Implement Alwaysbranch - Entry in DB ' + element.db + ' Index (' + sqlArIndex + ') "' + element.sql + '"');
     await SqlFuncs.executeSQL(_myReqPref)
-    // const test = await SqlFuncs.executeSQL(_myReqPref);
-    // console.log(test);
   }
 }
 

@@ -20,7 +20,6 @@ export interface dbRTEntities {
   ENTI_LAST_EDITED_BY: number
   ENTI_NOTES: string
   ENTI_DB_ID: number
-  ENTI_CHAR_ID: number
 }
 
 export interface dbRTEntitiesCategory {
